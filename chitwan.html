@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chitwan National Park - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/chitwan_national_park.webp') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.45);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#34d00d;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:hsl(111, 92%, 49%);
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #0be40f;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #06bc36;
+  color: rgb(28, 43, 99);
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p {
+  color:#222;
+  font-size:1.15rem;
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.gallery-section h3 {
+  font-size: 1.8rem;
+  color: #1a237e;
+  margin-bottom: 20px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{
+  color:#d37474;
+}
+/* ---------- FIXED GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img {
+  width: 22px;
+  height: 22px;
+}
+.map-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.map-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Chitwan National Park</h2>
+    <p>Nepal’s first national park — a UNESCO World Heritage treasure famed for rhinos, tigers, and rich subtropical biodiversity.</p>
+    <button class="hero-btn">Contact Us</button>
+  </div>
+</section>
+
+<!-- Info Section -->
+<section class="info-section">
+  <h3>Essential Facts & Rich Biodiversity</h3>
+  <p><strong>Area:</strong> 952.63 km² core area, 1,682 km² including buffer zones.</p>
+  <p><strong>Status:</strong> UNESCO World Heritage Site (1984).</p>
+  <p><strong>Mammals:</strong> Greater One-horned Rhinoceros, Royal Bengal Tiger, Sloth Bear, Asian Elephant, Leopard.</p>
+  <p><strong>Birds:</strong> 544 species including Bengal Florican and migratory species.</p>
+  <p><strong>Reptiles:</strong> Gharial, Mugger Crocodile, Asian Rock Python.</p>
+
+  <h3>Geography & Climate</h3>
+  <p><strong>Location:</strong> Subtropical Terai lowlands of south-central Nepal.</p>
+  <p><strong>Altitude:</strong> 100–815 m.</p>
+  <p><strong>Climate:</strong> Tropical Monsoon; best to visit Oct–Feb.</p>
+
+  <h3>Conservation History</h3>
+  <p>Established in 1973 after poaching crisis; buffer zones and community-based programs protect wildlife.</p>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/chitwan/rhino.jpg" alt="One-horned Rhinoceros">
+    <img src="images/chitwan/tiger.jpg" alt="Royal Bengal Tiger">
+    <img src="images/chitwan/elephant.jpg" alt="Asian Elephant Safari">
+    <img src="images/chitwan/bird.jpg" alt="Birdwatching">
+    <img src="images/chitwan/jungle.jpg" alt="Chitwan Jungle">
+    <img src="images/chitwan/canoe.jpg" alt="Canoeing in Rapti River">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<!-- JS -->
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+// Animate hero button border on page load
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+
+// Open contact page on hero button click
+document.querySelector('.hero-btn').addEventListener('click', function() {
+  window.location.href = 'contact.html';
+});
+
+// Show Google Maps button after scroll
+const mapBtn = document.getElementById('mapBtn');
+
+// Show button after scrolling
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) mapBtn.classList.add('show');
+  else mapBtn.classList.remove('show');
+});
+
+// Open Chitwan National Park on Google Maps
+mapBtn.addEventListener('click', () => {
+  window.open('https://www.google.com/maps/place/Chitwan+National+Park/@27.5342,84.3542,19769m/data=!3m1!1e3!4m6!3m5!1s0x3994b0337772df43:0xafa1603d5d63a217!8m2!3d27.519285!4d84.3135318!16zL20vMDZxMjdo!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
+});
+</script>
+
+</body>
+</html>

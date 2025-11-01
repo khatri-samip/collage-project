@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Langtang Valley - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/langtang_valley.webp') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#30eef1;
+}
+.hero-info p {
+  font-size:1.2rem;
+  line-height:1.5;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#30eef1;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #057d91;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #0bcad6;
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+.info-section h3 {
+  font-size:1.8rem;
+  color:#0a3f5f;
+  margin-bottom:12px;
+}
+.info-section p, .info-section li {
+  font-size:1.1rem;
+}
+table { width:100%; border-collapse:collapse; margin-top:15px; }
+th, td { border:1px solid #ddd; padding:10px; text-align:left; }
+th { background:#0a3f5f; color:#fff; }
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{ color:#30eef1; text-decoration:none;}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+
+/* ---------- FIXED GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img {
+  width: 22px;
+  height: 22px;
+}
+.map-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.map-btn:hover { transform: scale(1.05); }
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.gallery-section h3 {
+  font-size: 1.8rem;
+  color: #0a3f5f;
+  margin-bottom: 20px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="cards.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travel-tips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Langtang Valley</h2>
+    <p>The scenic Langtang Valley is Nepal’s closest Himalayan trekking destination, blending mountains, rivers, forests, and rich Tamang culture.</p>
+    <button class="hero-btn">Explore More</button>
+  </div>
+</section>
+
+<!-- Info Sections -->
+<section class="info-section">
+  <h3>Overview & Key Facts</h3>
+  <p><strong>Location:</strong> Bagmati Province, north of Kathmandu</p>
+  <p><strong>Altitude:</strong> 2,300 m – 4,984 m (Langtang Lirung Peak)</p>
+  <p><strong>National Park:</strong> Langtang National Park (est. 1976)</p>
+  <p><strong>Area:</strong> Approx. 1,710 km²</p>
+  <p><strong>Known For:</strong> Alpine landscapes, Tamang culture, rich biodiversity, trekking</p>
+</section>
+
+<section class="info-section">
+  <h3>Geography & Landscapes</h3>
+  <p>The valley is dominated by Langtang Lirung (7,227 m) and surrounded by pristine forests, alpine meadows, and rivers fed by glacial streams.</p>
+  <ul>
+    <li><strong>Langtang River:</strong> Flows southward into the Trishuli River.</li>
+    <li><strong>Glacial Features:</strong> Langtang Glacier and Langshisha Glacier.</li>
+    <li><strong>Forests:</strong> Rhododendron, pine, oak, and bamboo at lower elevations.</li>
+    <li><strong>Alpine Meadows:</strong> High-altitude grasslands above 3,500 m.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Flora & Fauna</h3>
+  <p>Langtang is home to Himalayan wildlife and diverse plant species:</p>
+  <table>
+    <tr><th>Category</th><th>Notable Species</th></tr>
+    <tr><td>Mammals</td><td>Red Panda, Himalayan Black Bear, Musk Deer, Langur, Himalayan Tahr, Snow Leopard (rare)</td></tr>
+    <tr><td>Birds</td><td>Monal Pheasant, Blood Pheasant, Himalayan Griffon, various migratory species</td></tr>
+    <tr><td>Plants</td><td>Rhododendron, Oak, Bamboo, Pine, Fir, Juniper</td></tr>
+  </table>
+</section>
+
+<section class="info-section">
+  <h3>Trekking Routes</h3>
+  <table>
+    <tr><th>Trek</th><th>Duration</th><th>Highest Point</th><th>Highlights</th></tr>
+    <tr><td>Langtang Valley Trek</td><td>7–10 days</td><td>Langtang Lirung Base (~4,984 m)</td><td>Rivers, alpine meadows, Tamang villages, mountain views</td></tr>
+    <tr><td>Langtang Gosainkunda Trek</td><td>10–12 days</td><td>Gosainkunda Lake (4,380 m)</td><td>Sacred alpine lake, Rhododendron forests, panoramic views</td></tr>
+    <tr><td>Langtang Helambu Trek</td><td>12–14 days</td><td>Langtang Lirung / Tarkeghyang (4,500 m)</td><td>Combination of Helambu and Langtang regions, cultural and scenic diversity</td></tr>
+  </table>
+</section>
+
+<section class="info-section">
+  <h3>Villages & Culture</h3>
+  <ul>
+    <li><strong>Langtang Village:</strong> Central village, offers local homestays.</li>
+    <li><strong>Kyanjin Gompa:</strong> Hilltop monastery with trekking lodges and cheese-making facilities.</li>
+    <li><strong>Shyala Village:</strong> Gateway to alpine pastures and high viewpoints.</li>
+  </ul>
+  <p>Tamang festivals, traditional music, and Buddhist prayer flags give trekkers a glimpse of the local culture.</p>
+</section>
+
+<section class="info-section">
+  <h3>Climate & Best Time to Visit</h3>
+  <ul>
+    <li><strong>Autumn (Sept–Nov):</strong> Clear skies, mild temperatures, ideal trekking weather.</li>
+    <li><strong>Spring (Mar–May):</strong> Blooming rhododendrons, pleasant temperatures.</li>
+    <li><strong>Winter (Dec–Feb):</strong> Cold, snow at higher elevations; lower valleys accessible.</li>
+    <li><strong>Monsoon (Jun–Aug):</strong> Heavy rainfall, slippery trails, leeches in lower forests.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Travel & Logistics</h3>
+  <ul>
+    <li>Nearest city: Kathmandu (~120 km)</li>
+    <li>Access: Drive to Syabrubesi (~8–10 hrs) and start trek from there.</li>
+    <li>Permits: Langtang National Park Entry Permit, TIMS Card</li>
+    <li>Accommodation: Teahouses, lodges, and homestays along the trekking route.</li>
+    <li>Tips: Carry cash, warm clothing, trekking boots, and basic medical kit.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Adventure & Activities</h3>
+  <ul>
+    <li>Hiking and trekking through alpine meadows and forests</li>
+    <li>Camping in remote valleys</li>
+    <li>Birdwatching and wildlife spotting</li>
+    <li>Cultural immersion in Tamang villages</li>
+    <li>Photography of glaciers, peaks, and traditional villages</li>
+  </ul>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/langtang/langtang_valley1.jpg" alt="Langtang Valley Landscape">
+    <img src="images/langtang/langtang_lirung.jpg" alt="Langtang Lirung Peak">
+    <img src="images/langtang/kyanjin_gompa.jpg" alt="Kyanjin Gompa Monastery">
+    <img src="images/langtang/langtang_river.jpg" alt="Langtang River">
+    <img src="images/langtang/alpine_meadow.jpg" alt="Alpine Meadows">
+    <img src="images/langtang/tamang_village.jpg" alt="Tamang Village">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<!-- JS -->
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+// Animate hero button border on page load
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+document.querySelector('.hero-btn').addEventListener('click', () => {
+  window.location.href='contact.html';
+});
+
+// Show Google Maps button after scrolling
+const mapBtn = document.getElementById('mapBtn');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 300) mapBtn.classList.add('show');
+  else mapBtn.classList.remove('show');
+});
+mapBtn.addEventListener('click', () => {
+  window.open('https://www.google.com/maps/place/Langtang+Valley', '_blank');
+});
+</script>
+
+</body>
+</html>

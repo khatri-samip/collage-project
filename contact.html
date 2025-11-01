@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- CONTACT FORM ---------- */
+.container { max-width:900px; margin:120px auto 60px; padding:0 20px; }
+.contact-section { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px; }
+.contact-info h3 { color:#1a237e; margin-bottom:15px; font-size:1.5rem; }
+.contact-info p { margin-bottom:10px; font-size:1.1rem; }
+.contact-form { padding:25px; background:#f8f8f8; border-radius:10px; }
+.contact-form input, .contact-form textarea { width:100%; padding:12px; margin:8px 0 15px; border:1px solid #ccc; border-radius:6px; font-size:1rem; }
+.contact-form input:focus, .contact-form textarea:focus { outline:2px solid #34d00d; border-color:#34d00d; }
+.contact-form button { width:100%; background:#34d00d; color:#fff; font-weight:600; border:none; border-radius:6px; padding:12px; cursor:pointer;
+}
+.contact-info a{
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bolder;
+}
+.contact-info span{
+  transition: 0.1s ease-in;
+}
+.contact-info span:hover{
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+/* ---------- INFO SECTIONS ---------- */
+.info-section { max-width:900px; margin:60px auto; padding:0 20px; display:flex; flex-direction:column; gap:25px; text-align:left; }
+.info-section h3 { color:#1a237e; font-size:1.5rem; margin-bottom:10px; }
+.info-section p, .info-section ul, .info-section li { color:#222; font-size:1.1rem; line-height:1.5; }
+.info-section ul { margin-left:20px; list-style: disc; }
+
+/* ---------- SOCIAL HANDLES ---------- */
+.social-handles img { width:50px; height:4-px;
+}
+textarea{
+  resize: none;
+}
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{ color:#d37474; }
+
+/* ---------- Responsive ---------- */
+@media(max-width:768px){ 
+  .contact-section{ grid-template-columns:1fr; } 
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="travelTips.html">Travel Tips</a>
+    <a href="privacy&policy.html">Privacy Policy</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="travelTips.html">Travel Tips</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+</nav>
+
+<!-- Contact Section -->
+<div class="container">
+  <div class="contact-section">
+    <div class="contact-info">
+      <h3>Contact Info</h3>
+      <p><strong>Email:</strong> discovernepal22@gmail.com</p>
+      <p><strong>Phone:</strong> +977-9843712865</p>
+      <p><strong>Location:</strong> Kathmandu, Nepal</p>
+      <p>Our team is happy to assist you with trip planning, inquiries, and bookings.</p>
+
+      <!-- Our Social Handles -->
+      <div class="social-handles" style="margin-top:30px;">
+        <h3 style="color:#1a237e; margin-bottom:12px;">Our Social Handles</h3>
+        <div style="display:flex; flex-direction:column; gap:15px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <img src="images/logo/insta.png" alt="Instagram">
+            <span style="font-size:1.1rem; color:#222;"><a href="https://www.instagram.com/_disovernepal/">Discover Nepal</a></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <img src="images/logo/youtube.jpg" alt="YouTube">
+            <span style="font-size:1.1rem; color:#222;"><a href="https://www.youtube.com/@DiscoverNepal-o7x4i">Discover Nepal</a></span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <img src="images/logo/x.webp" alt="X/Twitter">
+            <span style="font-size:1.1rem; color:#222;"><a href="https://x.com/discover_n37817">Discover Nepal</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Our Services & Why Choose Us Section -->
+  <section class="info-section">
+    <h3>Our Services</h3>
+    <p><strong>Guided Tours:</strong> Explore Nepal with expert local guides who provide rich cultural, historical, and natural insights.</p>
+    <p><strong>Custom Trips:</strong> Personalized itineraries including trekking, adventure, and cultural experiences tailored to your preferences.</p>
+    <p><strong>Hotel & Transport:</strong> Comfortable stays and reliable transport arranged for hassle-free travel.</p>
+    
+    <p><strong>Popular Destinations Routes by Province:</strong></p>
+    <ul>
+      <li><strong>Province 1:</strong> Biratnagar → Ilam → Dharan → Koshi Tappu Wildlife Reserve</li>
+      <li><strong>Province 2:</strong> Janakpur → Lahan → Siraha → Chitwan National Park</li>
+      <li><strong>Bagmati Province:</strong> Kathmandu → Bhaktapur → Patan → Nagarkot → Dhulikhel</li>
+      <li><strong>Gandaki Province:</strong> Pokhara → Sarangkot → Annapurna Base Camp → Bandipur</li>
+      <li><strong>Lumbini Province:</strong> Lumbini → Tansen → Palpa → Butwal</li>
+      <li><strong>Karnali Province:</strong> Jumla → Rara Lake → Mugu → Dolpa</li>
+      <li><strong>Sudurpashchim Province:</strong> Dhangadhi → Ghodaghodi Lake → Khaptad National Park → Baitadi</li>
+    </ul>
+
+    <h3>Why Choose Us</h3>
+    <p><strong>Experienced Guides:</strong> Our licensed local experts ensure safe and authentic experiences across Nepal.</p>
+    <p><strong>Authentic Experiences:</strong> We focus on cultural immersion, local cuisine, and off-the-beaten-path adventures.</p>
+    <p><strong>24/7 Support:</strong> Our team is always available to assist with bookings, travel tips, and emergency support.</p>
+    <p><strong>Tailored Itineraries:</strong> Every trip is customized to your needs and interests for a truly unique experience.</p>
+  </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- JS -->
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { if(window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => { if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden'); else navDrawer.setAttribute('hidden',''); });
+document.querySelectorAll('.nav-drawer a').forEach(link => { link.addEventListener('click', () => navDrawer.setAttribute('hidden','')); });
+
+// Demo form submission
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', e => { e.preventDefault(); alert("Thank you for contacting Discover Nepal! (Demo only)"); form.reset(); });
+</script>
+
+</body>
+</html>

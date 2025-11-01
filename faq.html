@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQs - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png" type="image/png">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    color: #222;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* ---------- HEADER / NAVBAR ---------- */
+  header {
+    background: #f8f8f8;
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  /* ---------- MAIN CONTENT ---------- */
+  main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  h2 {
+    color: #486795;
+    margin-top: 20px;
+  }
+
+  p.intro {
+    margin-bottom: 30px;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  /* ---------- FAQ SECTION ---------- */
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+
+  .faq-question {
+    cursor: pointer;
+    position: relative;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    font-size: 1.3rem;
+    color: #486795;
+  }
+
+  .faq-item.active .faq-question::after {
+    content: '-';
+  }
+
+  .faq-answer {
+    display: none;
+    margin-top: 10px;
+    color: #444;
+    font-size: 0.95rem;
+  }
+
+  .faq-item.active .faq-answer {
+    display: block;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 40px;
+    padding-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Discover Nepal</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Frequently Asked Questions</h2>
+  <p class="intro">
+    Have questions? We’ve got answers. Below are some of the most common questions travelers ask about visiting Nepal and using Discover Nepal.
+  </p>
+
+  <!-- FAQ ITEMS -->
+  <div class="faq-item">
+    <div class="faq-question">Do I need a visa to visit Nepal?</div>
+    <div class="faq-answer">Yes, most travelers need a visa to enter Nepal. You can obtain a visa on arrival at Tribhuvan International Airport or apply online through the Nepal Immigration website. Ensure your passport is valid for at least six months beyond your travel dates.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What is the best time to visit Nepal?</div>
+    <div class="faq-answer">The best times to visit Nepal are during spring (March–May) and autumn (September–November). During these months, the weather is pleasant, and the skies are clear—perfect for trekking and sightseeing.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is Nepal safe for solo travelers?</div>
+    <div class="faq-answer">Nepal is generally very safe for solo travelers. The locals are kind and welcoming. However, always take basic safety precautions—avoid isolated areas at night and keep valuables secure.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Do I need travel insurance before visiting Nepal?</div>
+    <div class="faq-answer">Yes, travel insurance is strongly recommended, especially if you plan to trek or do adventure sports. It should cover medical emergencies, cancellations, and evacuation.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What currency is used in Nepal?</div>
+    <div class="faq-answer">The Nepalese Rupee (NPR) is the official currency. You can exchange foreign currency at banks and authorized exchange counters. Cash is preferred in rural areas.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is internet access available throughout Nepal?</div>
+    <div class="faq-answer">Yes, Wi-Fi is available in most cities and hotels. For remote trekking routes, it’s advisable to get a local SIM card with data for reliable connectivity.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What should I pack for my Nepal trip?</div>
+    <div class="faq-answer">Pack according to the season and your activities. Essentials include layered clothing, trekking shoes, sunscreen, reusable bottles, and basic first aid items.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">How can I contact Discover Nepal for assistance?</div>
+    <div class="faq-answer">You can reach us through our <a href="contact.html">Contact Page</a>. We reply within 24 hours for travel queries, bookings, or general assistance.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Are trekking permits required in Nepal?</div>
+    <div class="faq-answer">Yes, most trekking routes require permits such as the TIMS card and conservation area permits (like for Annapurna or Everest regions). We can guide you on obtaining these easily.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Can I use credit cards in Nepal?</div>
+    <div class="faq-answer">Credit cards are accepted in major hotels, restaurants, and shops in Kathmandu and Pokhara. However, smaller towns and trekking areas prefer cash payments.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What languages are spoken in Nepal?</div>
+    <div class="faq-answer">Nepali is the official language, but English is widely understood in tourist areas. Learning a few local greetings will earn you warm smiles and better connections.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is it safe to drink tap water in Nepal?</div>
+    <div class="faq-answer">Tap water is not safe to drink. Always use bottled or filtered water. We recommend carrying a reusable filter bottle to stay eco-friendly.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">How reliable is transportation in Nepal?</div>
+    <div class="faq-answer">Domestic flights, buses, and taxis are available across the country. Mountain weather can affect flight schedules, so plan flexible travel days.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Can I trek without a guide?</div>
+    <div class="faq-answer">While some routes are open to solo trekkers, hiring a guide is recommended for safety, navigation, and cultural insight—especially in remote regions.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Do I need vaccinations before traveling to Nepal?</div>
+    <div class="faq-answer">Yes, consult your doctor about vaccines for Hepatitis A, Typhoid, and Tetanus. If you’re visiting rural areas, discuss malaria precautions too.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What are some cultural etiquette tips?</div>
+    <div class="faq-answer">Remove shoes before entering homes or temples, dress modestly, and avoid public displays of affection. A slight bow with palms together (“Namaste”) is a polite greeting.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">What emergency numbers should I know?</div>
+    <div class="faq-answer">The emergency numbers in Nepal are: Police – 100, Ambulance – 102, Fire – 101. Keep your embassy’s contact info handy as well.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Are there eco-friendly travel options in Nepal?</div>
+    <div class="faq-answer">Yes, you can choose eco-lodges, support local guides, and avoid plastic waste. Many tour operators now follow sustainable and responsible tourism practices.</div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Discover Nepal. All rights reserved.
+</footer>
+
+<script>
+// FAQ Toggle Functionality
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('active');
+  });
+});
+</script>
+
+</body>
+</html>

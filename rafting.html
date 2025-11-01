@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafting in Nepal - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; text-decoration:none; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/rafting_hero.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#11f6b1;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#3adeac;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #90802a;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #09adaa;
+}
+
+/* Scroll Down Indicator */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  animation: bounce 2s infinite;
+  z-index: 2;
+}
+.scroll-down .arrow {
+  font-size: 2rem;
+  margin-top: 5px;
+}
+.scroll-down a {
+  color: #fff;
+  text-decoration: none;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p {
+  color:#222;
+  font-size:1.15rem;
+}
+.info-section ul li {
+  margin-bottom:8px;
+}
+
+/* ---------- Rafting Rivers ---------- */
+.raft-section {
+  width: 100%;
+  margin: 50px 0;
+  padding: 0 20px;
+}
+.raft-section img {
+  width: 100%;
+  display:block;
+  cursor:pointer;
+}
+.raft-section h4 {
+  margin-top: 10px;
+  font-size:1.5rem;
+  color:#0a3f5f;
+}
+.raft-section p {
+  margin:10px 0;
+}
+.map-btn {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fff;
+  color:#222;
+  font-weight:bold;
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.map-btn img {
+  width:20px;
+  height:20px;
+}
+
+/* ---------- POPUP IMAGE VIEWER ---------- */
+.popup-overlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.popup-overlay img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+.popup-overlay .close-btn {
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:2rem;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{ color:#d37474; }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Rafting in Nepal</h2>
+    <p>Experience the thrill of white-water rafting across Nepal’s most exciting rivers, surrounded by stunning landscapes.</p>
+    <button class="hero-btn">View Rivers</button>
+  </div>
+  <div class="scroll-down">
+    <a href="#rafting-rivers" class="arrow">&#x2193;</a>
+    <div>Rivers below</div>
+  </div>
+</section>
+
+<!-- Overview Section -->
+<section class="info-section">
+  <h3>Overview</h3>
+  <p>Nepal is a world-class destination for river rafting, offering rivers for all levels from beginners to adventure seekers. Enjoy roaring rapids, lush valleys, and cultural villages along the rivers.</p>
+  <ul>
+    <li><strong>Rafting Levels:</strong> Easy, Moderate, Challenging, Extreme.</li>
+    <li><strong>Popular Rivers:</strong> Trishuli, Bhote Koshi, Sun Koshi, Seti, Kali Gandaki.</li>
+    <li><strong>Cultural Experience:</strong> Experience riverside villages and local traditions.</li>
+    <li><strong>Adventure Activities:</strong> Rafting, kayaking, canyoning, and nature exploration.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Rafting Tips</h3>
+  <ul>
+    <li>Wear life jackets and helmets at all times.</li>
+    <li>Follow the guide's instructions carefully.</li>
+    <li>Wear quick-dry clothing and water shoes.</li>
+    <li>Bring a waterproof camera or GoPro.</li>
+    <li>Stay hydrated and carry sunscreen.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Best Time for Rafting</h3>
+  <ul>
+    <li><strong>Spring (March–May):</strong> Moderate water levels, scenic landscapes.</li>
+    <li><strong>Autumn (Sept–Nov):</strong> Clear weather, ideal for all levels.</li>
+    <li><strong>Monsoon (June–Aug):</strong> High water levels, suitable for experienced rafters only.</li>
+    <li><strong>Winter (Dec–Feb):</strong> Low water, calmer rapids, beautiful surroundings.</li>
+  </ul>
+</section>
+
+<section id="rafting-rivers">
+    <br><br>
+<section class="info-section">
+  <h3>Popular Rafting Rivers</h3>
+
+  <div class="raft-section">
+    <img src="images/rafting/trishuli.jpg" alt="Trishuli River">
+    <h4>Trishuli River</h4>
+    <p>One of Nepal’s most popular rafting rivers, suitable for beginners and intermediates. Surrounded by beautiful hills and villages.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Trishuli+River','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
+    </button>
+  </div>
+
+  <div class="raft-section">
+    <img src="images/rafting/bhotekoshi.jpg" alt="Bhote Koshi River">
+    <h4>Bhote Koshi River</h4>
+    <p>Famous for adrenaline-pumping rapids, perfect for adventure seekers. Known as the Himalayan thrill river.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Bhote+Koshi+River','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
+    </button>
+  </div>
+
+  <div class="raft-section">
+    <img src="images/rafting/sunkoshi.jpg" alt="Sun Koshi River">
+    <h4>Sun Koshi River</h4>
+    <p>Longest rafting river in Nepal, offering multi-day trips through stunning gorges and remote villages.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Sun+Koshi+River','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
+    </button>
+  </div>
+
+  <div class="raft-section">
+    <img src="images/rafting/seti.jpg" alt="Seti River">
+    <h4>Seti River</h4>
+    <p>Shorter rafting trips ideal for beginners. White rapids and scenic surroundings make it a great day trip.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Seti+River','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
+    </button>
+  </div>
+
+</section>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Image Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+  <span class="close-btn" id="closePopup">&times;</span>
+  <img src="" id="popupImage" alt="Rafting Image">
+</div>
+
+<script>
+/* Navbar scroll */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+/* Hamburger */
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+/* Animate hero button border */
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+
+/* Hero button scroll */
+document.querySelector('.hero-btn').addEventListener('click', function() {
+    document.getElementById('rafting-rivers').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* Image popup */
+const popupOverlay = document.getElementById('popupOverlay');
+const popupImage = document.getElementById('popupImage');
+const closePopup = document.getElementById('closePopup');
+
+document.querySelectorAll('.raft-section img').forEach(img => {
+  img.addEventListener('click', () => {
+    popupImage.src = img.src;
+    popupOverlay.style.display = 'flex';
+  });
+});
+
+closePopup.addEventListener('click', () => popupOverlay.style.display='none');
+popupOverlay.addEventListener('click', e => {
+  if(e.target === popupOverlay) popupOverlay.style.display='none';
+});
+</script>
+
+</body>
+</html>

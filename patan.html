@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patan Durbar Square - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/patan_durbar_square.webp') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#11f6b1;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#3adeac;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #90802a;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #09adaa;
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p, .info-section li {
+  color:#222;
+  font-size:1.15rem;
+}
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{
+  color:#d37474;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+
+/* ---------- FIXED GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img {
+  width: 22px;
+  height: 22px;
+}
+.map-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.map-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.gallery-section h3 {
+  font-size: 1.8rem;
+  color: #1a237e;
+  margin-bottom: 20px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Patan Durbar Square</h2>
+    <p>Historic palace square in Lalitpur, showcasing exquisite Newar architecture, temples, and bustling local culture.</p>
+    <button class="hero-btn">Learn More</button>
+  </div>
+</section>
+
+<!-- Info Sections -->
+<section class="info-section">
+  <h3>Overview & Key Facts</h3>
+  <p><strong>Location:</strong> Lalitpur (Patan), Kathmandu Valley, Nepal</p>
+  <p><strong>UNESCO Status:</strong> Part of Kathmandu Valley World Heritage Site since 1979</p>
+  <p><strong>Significance:</strong> Historic royal palace and central hub of Newar culture and architecture.</p>
+  <p><strong>Established:</strong> 14th century, with additions over centuries</p>
+</section>
+
+<section class="info-section">
+  <h3>Historical & Cultural Significance</h3>
+  <p>Patan Durbar Square has been the seat of the Malla kings of Lalitpur and is famous for its artistic heritage, including intricate wood carvings, stone sculptures, and metalwork. The square remains an active center for festivals, religious rituals, and daily local life.</p>
+</section>
+
+<section class="info-section">
+  <h3>Main Monuments & Features</h3>
+  <ul>
+    <li><strong>Patan Royal Palace:</strong> Historic palace complex housing the Patan Museum with fine arts and artifacts.</li>
+    <li><strong>Krishna Mandir:</strong> Stone temple dedicated to Lord Krishna, built in the Shikhara style, notable for exquisite carvings.</li>
+    <li><strong>Bhimsen Temple:</strong> Dedicated to Bhimsen, god of trade and business, frequented by local merchants.</li>
+    <li><strong>Golden Gate:</strong> Ornate entrance to the palace with intricate metalwork.</li>
+    <li><strong>Local Courtyards & Temples:</strong> Numerous smaller temples, statues, and courtyards reflecting Newar craftsmanship.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Festivals & Rituals</h3>
+  <ul>
+    <li>Indra Jatra: Celebrates the deity Indra with traditional dances, chariot processions, and rituals.</li>
+    <li>Bisket Jatra: Marks the Nepali New Year with cultural ceremonies and festivities.</li>
+    <li>Daily Worship: Locals offer prayers and light lamps at various temples throughout the square.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Visitor Information & Logistics</h3>
+  <ul>
+    <li>Open daily; entry fee required for foreigners (supports heritage preservation).</li>
+    <li>Accessible from central Kathmandu; guided tours available for cultural insights.</li>
+    <li>Best time to visit: September–December or February–April for clear weather.</li>
+    <li>Nearby attractions: Bhaktapur Durbar Square, Kathmandu Durbar Square, local markets, and artisan workshops.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Visitor Tips</h3>
+  <ul>
+    <li>Respect local customs and avoid touching sacred objects in temples.</li>
+    <li>Wear comfortable walking shoes; streets and courtyards are uneven.</li>
+    <li>Photography allowed in most areas, but ask permission before photographing locals or rituals.</li>
+    <li>Carry water and small cash for local purchases or donations at temples.</li>
+  </ul>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/patan_durbar/krishna_mandir.jpg" alt="Krishna Mandir">
+    <img src="images/patan_durbar/patan_palace.jpg" alt="Patan Royal Palace">
+    <img src="images/patan_durbar/bhimsan_temple.jpg" alt="Bhimsen Temple">
+    <img src="images/patan_durbar/golden_gate.jpg" alt="Golden Gate">
+    <img src="images/patan_durbar/courtyard.jpg" alt="Local Courtyard">
+    <img src="images/patan_durbar/night_view.jpg" alt="Night View of Patan Durbar Square">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+// Mobile drawer
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+// Animate hero button
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+document.querySelector('.hero-btn').addEventListener('click', () => {
+  window.location.href = 'contact.html';
+});
+
+// Show Google Maps button after scrolling
+const mapBtn = document.getElementById('mapBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) mapBtn.classList.add('show');
+  else mapBtn.classList.remove('show');
+});
+mapBtn.addEventListener('click', () => {
+  window.open('https://www.google.com/maps/place/Patan+Darbar+Square/@27.6726981,85.3227408,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39eb19c50daa2fb1:0x6f197fa38097b530!8m2!3d27.6726981!4d85.3253211!16s%2Fm%2F0h1h5qp!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
+});
+</script>
+
+</body>
+</html>

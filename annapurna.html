@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annapurna Region - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; text-decoration:none; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; text-decoration:none; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/annapurna.webp') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#eb6218;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#e88533;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #e59a05;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #eba636;
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p, li {
+  color:#222;
+  font-size:1.15rem;
+}
+
+/* ---------- TABLES ---------- */
+table {
+  width:100%; border-collapse:collapse; margin:15px 0;
+  font-size:1.05rem;
+}
+th, td {
+  border:1px solid #ccc; padding:10px 12px; text-align:left;
+}
+th {
+  background:#fa943b; color:#000; font-weight:700;
+}
+tr:nth-child(even){ background:#f7f7f7; }
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{
+  color:#d37474;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+
+/* ---------- FIXED GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img {
+  width: 22px;
+  height: 22px;
+}
+.map-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.map-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.gallery-section h3 {
+  font-size: 1.8rem;
+  color: #1a237e;
+  margin-bottom: 20px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Annapurna Region</h2>
+    <p>The heart of the Himalayas — a world of snow-capped peaks, rich culture, and legendary trekking adventures.</p>
+    <button class="hero-btn">Contact Us</button>
+  </div>
+</section>
+
+<!-- Info Sections (Original content kept intact) -->
+<section class="info-section">
+
+  <h3>The Annapurna Region: The Heart of the Himalayas</h3>
+  <p>The Annapurna region, anchored by the mighty Annapurna Massif, is one of Nepal's most famous and diverse trekking destinations. It showcases an extraordinary range of landscapes — from subtropical forests and terraced farmlands to high alpine plateaus and the arid Mustang valley.</p>
+
+  <h3>🗻 The Annapurna Massif</h3>
+  <table>
+    <tr><th>Peak Name</th><th>Elevation</th><th>Global Rank</th><th>Significance</th></tr>
+    <tr><td>Annapurna I (Main)</td><td>8,091 m (26,545 ft)</td><td>10th Highest</td><td>The first 8,000 m peak ever climbed (1950); known for its difficulty.</td></tr>
+    <tr><td>Dhaulagiri I</td><td>8,167 m (26,795 ft)</td><td>7th Highest</td><td>Separated from Annapurna by the Kali Gandaki — the world’s deepest gorge.</td></tr>
+    <tr><td>Machhapuchhre (Fishtail)</td><td>6,993 m (22,943 ft)</td><td>-</td><td>Sacred, unclimbed, and iconic over Pokhara’s skyline.</td></tr>
+  </table>
+
+  <h3>🏞️ Key Geographical Features</h3>
+  <ul>
+    <li><b>Kali Gandaki Gorge:</b> The world’s deepest gorge, cutting dramatically between Annapurna I and Dhaulagiri I.</li>
+    <li><b>The Rain Shadow:</b> Annapurna’s range blocks monsoon clouds, creating lush southern slopes and arid northern valleys (Mustang, Manang).</li>
+    <li><b>Base City – Pokhara:</b> Known as the “City of Lakes,” and the main gateway for Annapurna treks.</li>
+  </ul>
+
+  <h3>🚶 World-Class Trekking Routes</h3>
+  <table>
+    <tr><th>Trek Route</th><th>Duration</th><th>Highest Point</th><th>Key Highlights</th></tr>
+    <tr><td>Annapurna Circuit Trek (ACT)</td><td>14–21 days</td><td>Thorong La Pass (5,416 m)</td><td>Cultural diversity, Tilicho Lake, and the world’s deepest gorge.</td></tr>
+    <tr><td>Annapurna Base Camp (ABC) Trek</td><td>7–12 days</td><td>ABC (4,130 m)</td><td>Natural amphitheater of peaks; bamboo & rhododendron forests.</td></tr>
+    <tr><td>Ghorepani Poon Hill Trek</td><td>4–6 days</td><td>Poon Hill (3,210 m)</td><td>Famous sunrise view of Annapurna & Dhaulagiri ranges.</td></tr>
+    <tr><td>Upper Mustang Trek</td><td>10–15 days</td><td>Lo Manthang (~3,840 m)</td><td>Ancient Tibetan culture, desert terrain, and walled city.</td></tr>
+  </table>
+
+  <h3>🏘️ Notable Villages and Attractions</h3>
+  <ul>
+    <li><b>Ghandruk:</b> A Gurung village with cultural richness and sweeping mountain views.</li>
+    <li><b>Manang:</b> High-altitude village with Tibetan culture and acclimatization stops.</li>
+    <li><b>Muktinath:</b> Sacred Hindu-Buddhist pilgrimage site high above Kali Gandaki.</li>
+    <li><b>Tatopani:</b> Famous for natural hot springs, a rest stop for weary trekkers.</li>
+    <li><b>Tilicho Lake:</b> One of the world’s highest lakes, accessible from the Circuit.</li>
+  </ul>
+
+  <h3>💚 The Annapurna Conservation Area Project (ACAP)</h3>
+  <p>The Annapurna region is Nepal’s first and largest conservation area (<b>7,629 km²</b>), managed by the National Trust for Nature Conservation (NTNC). It follows a community-based conservation model ensuring tourism benefits locals directly.</p>
+  <ul>
+    <li>Sustains natural resources and biodiversity.</li>
+    <li>Empowers local communities in conservation.</li>
+    <li>Integrates eco-tourism with cultural preservation.</li>
+  </ul>
+
+  <h3>🌤️ Best Time to Trek</h3>
+  <table>
+    <tr><th>Season</th><th>Months</th><th>Key Characteristics</th></tr>
+    <tr><td>🍂 Autumn (Peak)</td><td>Late Sept – Mid Dec</td><td>Stable weather, clear skies, best mountain views.</td></tr>
+    <tr><td>🌸 Spring</td><td>March – May</td><td>Pleasant temps, blooming rhododendrons, bright scenery.</td></tr>
+    <tr><td>☀️ Summer (Monsoon)</td><td>June – Aug</td><td>Rainy and humid, but best time for Upper Mustang.</td></tr>
+    <tr><td>❄️ Winter</td><td>Late Dec – Feb</td><td>Cold at high altitudes; challenging high passes.</td></tr>
+  </table>
+
+  <h3>🛂 Trekking Permits & Regulations</h3>
+  <ul>
+    <li><b>Annapurna Conservation Area Permit (ACAP):</b> Required for all trekkers; supports conservation and local communities.</li>
+    <li><b>TIMS Card:</b> Tracks trekkers’ details for safety.</li>
+    <li><b>Guide Rule:</b> As of 2023, foreign trekkers must hire a licensed Nepali guide or join an organized tour.</li>
+  </ul>
+  <p><b>Where to Obtain:</b> Nepal Tourism Board (Kathmandu) or Tourist Office (Pokhara). Carry passport, visa, and photos.</p>
+
+  <h3>⚠️ Safety, Difficulty & Altitude Sickness</h3>
+  <p>Trekking difficulty ranges from moderate to challenging. High altitude requires gradual acclimatization.</p>
+  <ul>
+    <li><b>Annapurna Circuit:</b> Challenging; Thorong La Pass (5,416 m) is demanding.</li>
+    <li><b>ABC Trek:</b> Moderate; steep ascents and descents, max altitude 4,130 m.</li>
+    <li><b>Poon Hill:</b> Easy to moderate; minimal altitude risk.</li>
+  </ul>
+
+  <table>
+    <tr><th>Prevention Tips</th><th>Details</th></tr>
+    <tr><td>Go Slow</td><td>Limit daily ascent to 300–500 m above 3,000 m.</td></tr>
+    <tr><td>Stay Hydrated</td><td>Drink 3–4 liters of water per day.</td></tr>
+    <tr><td>Climb High, Sleep Low</td><td>Ascend higher during the day, sleep lower at night.</td></tr>
+    <tr><td>Know Symptoms</td><td>Watch for headache, nausea, dizziness — descend if severe.</td></tr>
+  </table>
+
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/annapurna/annapurna_peak.jpg" alt="Annapurna Peak">
+    <img src="images/annapurna/ghorepani.jpg" alt="Ghorepani">
+    <img src="images/annapurna/manang.jpg" alt="Manang Village">
+    <img src="images/annapurna/muktinath.jpg" alt="Muktinath">
+    <img src="images/annapurna/tilicho_lake.jpg" alt="Tilicho Lake">
+    <img src="images/annapurna/poon_hill.jpg" alt="Poon Hill">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<!-- JS -->
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => navDrawer.toggleAttribute('hidden'));
+document.querySelectorAll('.nav-drawer a').forEach(link => link.addEventListener('click', () => navDrawer.setAttribute('hidden','')));
+window.addEventListener('load', () => document.querySelector('.hero-btn').classList.add('animate'));
+document.querySelector('.hero-btn').addEventListener('click', () => window.location.href='contact.html');
+
+// Show map button on scroll
+const mapBtn = document.getElementById('mapBtn');
+window.addEventListener('scroll', () => mapBtn.classList.toggle('show', window.scrollY > 300));
+mapBtn.addEventListener('click', () => window.open('https://www.google.com/maps/place/Annapurna', '_blank'));
+</script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paragliding in Nepal - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; text-decoration:none; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/paragliding_hero.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#11f6b1;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#3adeac;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #90802a;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #09adaa;
+}
+
+/* Scroll Down Indicator */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  animation: bounce 2s infinite;
+  z-index: 2;
+}
+.scroll-down .arrow {
+  font-size: 2rem;
+  margin-top: 5px;
+}
+.scroll-down a {
+  color: #fff;
+  text-decoration: none;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px); }
+  100% { opacity:1; transform: translateY(0); }
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p {
+  color:#222;
+  font-size:1.15rem;
+}
+.info-section ul li {
+  margin-bottom:8px;
+}
+
+/* ---------- PARAGLIDING PLACES ---------- */
+.place-section {
+  width: 100%;
+  margin: 50px 0;
+  padding: 0 20px;
+}
+.place-section img {
+  width: 100%;
+  display:block;
+  cursor:pointer;
+  border-radius:8px;
+}
+.place-section h4 {
+  margin-top: 10px;
+  font-size:1.5rem;
+  color:#0a3f5f;
+}
+.place-section p {
+  margin:10px 0;
+}
+.map-btn {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fff;
+  color:#222;
+  font-weight:bold;
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.map-btn img {
+  width:20px;
+  height:20px;
+}
+
+/* ---------- POPUP IMAGE VIEWER ---------- */
+.popup-overlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.popup-overlay img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+.popup-overlay .close-btn {
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:2rem;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{ color:#d37474; }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Paragliding in Nepal</h2>
+    <p>Soar high above valleys, lakes, and the Himalayas — an adventure of a lifetime awaits you in the skies of Nepal.</p>
+    <button class="hero-btn">View Places</button>
+  </div>
+  <div class="scroll-down">
+    <a href="#paragliding-places" class="arrow">&#x2193;</a>
+    <div>Popular paragliding sites below</div>
+  </div>
+</section>
+
+<!-- Overview Section -->
+<section class="info-section">
+  <h3>Overview</h3>
+  <p>Paragliding in Nepal offers stunning bird’s-eye views of the Himalayan peaks, serene lakes, and lush valleys. Pokhara is the world’s top destination, but other spots like Sirkot and Bandipur provide equally thrilling experiences. Whether you’re a beginner or an expert, Nepal’s thermals and weather conditions make it ideal for paragliding adventures.</p>
+</section>
+
+<section class="info-section">
+  <h3>Best Time for Paragliding</h3>
+  <ul>
+    <li><strong>Autumn (Sept–Nov):</strong> Clear skies, perfect wind conditions.</li>
+    <li><strong>Spring (Mar–May):</strong> Warm weather and excellent visibility.</li>
+    <li><strong>Winter (Dec–Feb):</strong> Great for Pokhara — stable air and peaceful rides.</li>
+  </ul>
+</section>
+
+<!-- Popular Paragliding Places -->
+<section id="paragliding-places">
+<br><br>
+<section class="info-section">
+  <h3>Popular Paragliding Places</h3>
+
+  <div class="place-section">
+    <img src="images/paragliding/pokhara.jpg" alt="Pokhara Paragliding">
+    <h4>Pokhara</h4>
+    <p>The paragliding capital of Nepal. Glide above Phewa Lake with breathtaking views of Annapurna and Machhapuchhre mountains.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Pokhara','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
+    </button>
+  </div>
+
+  <div class="place-section">
+    <img src="images/paragliding/sirkot.jpg" alt="Sirkot Paragliding">
+    <h4>Sirkot</h4>
+    <p>A quiet alternative to Pokhara, known for early morning flights above misty valleys and scenic ridges.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Sirkot','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
+    </button>
+  </div>
+
+  <div class="place-section">
+    <img src="images/paragliding/bandipur.jpg" alt="Bandipur Paragliding">
+    <h4>Bandipur</h4>
+    <p>Fly over an ancient hilltop town with panoramic mountain views and tranquil countryside landscapes.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Bandipur','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
+    </button>
+  </div>
+
+  <div class="place-section">
+    <img src="images/paragliding/kotdanda.jpg" alt="Kot Danda Kathmandu Paragliding">
+    <h4>Kot Danda (Kathmandu)</h4>
+    <p>Perfect for quick flights near the capital — enjoy bird’s-eye views of Kathmandu Valley and surrounding hills.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Kot+Danda','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
+    </button>
+  </div>
+
+  <div class="place-section">
+    <img src="images/paragliding/dharan.jpg" alt="Dharan Paragliding">
+    <h4>Dharan</h4>
+    <p>Eastern Nepal’s paragliding site, offering flights over the lush hills and scenic plains below.</p>
+    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Dharan','_blank')">
+      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
+    </button>
+  </div>
+
+</section>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Image Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+  <span class="close-btn" id="closePopup">&times;</span>
+  <img src="" id="popupImage" alt="Paragliding Image">
+</div>
+
+<script>
+/* Navbar scroll */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{window.scrollY>50?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled');});
+
+/* Hamburger menu */
+const hamburger=document.getElementById('hamburger');
+const navDrawer=document.getElementById('nav-drawer');
+hamburger.addEventListener('click',()=>{navDrawer.hasAttribute('hidden')?navDrawer.removeAttribute('hidden'):navDrawer.setAttribute('hidden','');});
+document.querySelectorAll('.nav-drawer a').forEach(link=>{link.addEventListener('click',()=>navDrawer.setAttribute('hidden',''));});
+
+/* Animate hero button border */
+window.addEventListener('load',()=>{document.querySelector('.hero-btn').classList.add('animate');});
+
+/* Hero button scroll */
+document.querySelector('.hero-btn').addEventListener('click',()=>{document.getElementById('paragliding-places').scrollIntoView({behavior:'smooth'});});
+
+/* Image popup */
+const popupOverlay=document.getElementById('popupOverlay');
+const popupImage=document.getElementById('popupImage');
+const closePopup=document.getElementById('closePopup');
+document.querySelectorAll('.place-section img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    popupImage.src=img.src;
+    popupOverlay.style.display='flex';
+  });
+});
+closePopup.addEventListener('click',()=>popupOverlay.style.display='none');
+popupOverlay.addEventListener('click',e=>{if(e.target===popupOverlay)popupOverlay.style.display='none';});
+</script>
+
+</body>
+</html>

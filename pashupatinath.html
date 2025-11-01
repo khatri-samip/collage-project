@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pashupatinath Temple - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/pashupathnath_temple.webp') center/cover no-repeat;
+  display:flex; align-items:flex-end; justify-content:flex-end;
+  padding:40px; color:#fff; overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute; inset:0; background: rgba(0,0,0,0.4); z-index:0;
+}
+.hero-info { position:relative; max-width:500px; z-index:1; text-align:right; opacity:0; animation: fadeIn 1.8s ease forwards; }
+.hero-info h2 { font-size:3rem; margin-bottom:20px; color:#ffd700; }
+.hero-info p { font-size:1.2rem; line-height:1.5; color:#fff; }
+.hero-info .hero-btn {
+  margin-top:20px; padding:12px 25px; font-weight:700; color:#000; background:#ffd700; border:none; border-radius:12px; cursor:pointer; position:relative; overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #b38f00;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before { transform: scaleX(1); }
+.hero-btn:hover { background-color: #e6c200; }
+@keyframes fadeIn { 0% { opacity:0; transform: translateY(30px);} 100% { opacity:1; transform: translateY(0);} }
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section { max-width:1000px; margin:40px auto; padding:0 20px; display:flex; flex-direction:column; gap:30px; }
+.info-section h3 { font-size:1.8rem; color:#0a3f5f; margin-bottom:12px; }
+.info-section p, .info-section li { font-size:1.1rem; }
+table { width:100%; border-collapse:collapse; margin-top:15px; }
+th, td { border:1px solid #ddd; padding:10px; text-align:left; }
+th { background:#0a3f5f; color:#fff; }
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{ color:#ffd700; text-decoration:none; }
+
+/* ---------- GALLERY ---------- */
+.gallery-section { max-width:1100px; margin:60px auto; padding:0 20px; text-align:center; }
+.gallery-section h3 { font-size:1.8rem; color:#0a3f5f; margin-bottom:20px; }
+.gallery-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+.gallery-container img { width:100%; border-radius:10px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.gallery-container img:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+/* ---------- GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img { width:22px; height:22px; }
+.map-btn.show { opacity:1; visibility:visible; transform: translateY(0); }
+.map-btn:hover { transform: scale(1.05); }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Pashupatinath Temple</h2>
+    <p>The most sacred Hindu temple dedicated to Lord Shiva, located on the banks of the Bagmati River in Kathmandu.</p>
+    <button class="hero-btn">Learn More</button>
+  </div>
+</section>
+
+<!-- Info Sections -->
+<section class="info-section">
+  <h3>Overview & Key Facts</h3>
+  <p><strong>Location:</strong> Kathmandu, Bagmati Province, Nepal</p>
+  <p><strong>Deity:</strong> Lord Shiva</p>
+  <p><strong>Significance:</strong> UNESCO World Heritage Site, one of the holiest Hindu temples in Nepal and Asia</p>
+  <p><strong>Architecture:</strong> Pagoda-style temple with intricate wood carvings and gilded roofs</p>
+  <p><strong>Festivals:</strong> Maha Shivaratri is the biggest celebration attracting thousands of devotees</p>
+</section>
+
+<section class="info-section">
+  <h3>Historical & Cultural Significance</h3>
+  <p>Pashupatinath Temple is believed to have existed since 400 A.D., although the current pagoda structure was built in the 17th century. It is the spiritual heart of Nepalese Hindus and a key pilgrimage site. The temple's sacred Bagmati River is used for ritual bathing and cremation ceremonies along its ghats.</p>
+</section>
+
+<section class="info-section">
+  <h3>Architecture & Temple Complex</h3>
+  <ul>
+    <li>Main temple: two-story pagoda with gilded roof and silver doors.</li>
+    <li>Inner sanctum houses a stone idol of Pashupati, Shiva as “Lord of Animals.”</li>
+    <li>Temple complex along Bagmati River with smaller shrines.</li>
+    <li>Wooden carvings, statues, and traditional Hindu motifs.</li>
+    <li>Ashrams, dharmashalas, and shelters for sadhus.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Rituals & Ceremonies</h3>
+  <ul>
+    <li>Daily aarti at sunrise and sunset.</li>
+    <li>Maha Shivaratri festival: largest religious gathering in Nepal.</li>
+    <li>Cremation ceremonies on the ghats along Bagmati River.</li>
+    <li>Offerings: flowers, milk, holy water, Bilva leaves.</li>
+    <li>Witness sadhus meditating and chanting hymns.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Visiting & Logistics</h3>
+  <ul>
+    <li>Open year-round; early morning or late afternoon recommended.</li>
+    <li>Entry fee for non-Hindus at main temple entrance.</li>
+    <li>Dress code: shoulders and knees covered inside temple complex.</li>
+    <li>Nearby attractions: Ghats, Bishnumati River confluence, Kumbheshwar Temple, local markets.</li>
+    <li>Best time: October–March; Maha Shivaratri in Feb/March is special.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Nearby Attractions & Experiences</h3>
+  <ul>
+    <li>Bagmati River ghats: observe cremation ceremonies.</li>
+    <li>Sadhus & Holy Men: learn about ascetic life.</li>
+    <li>Kathmandu Durbar Square: UNESCO site with palaces, temples, museums.</li>
+    <li>Patan and Bhaktapur: explore ancient cities with Newar culture.</li>
+    <li>Local markets: handicrafts, prayer beads, religious souvenirs.</li>
+  </ul>
+</section>
+
+<section class="info-section">
+  <h3>Visitor Tips</h3>
+  <ul>
+    <li>Respect religious practices; do not touch idols or sacred items.</li>
+    <li>Photography restricted inside main sanctum; ask permission for sadhus.</li>
+    <li>Carry small cash for donations.</li>
+    <li>Wear comfortable footwear; stone paths involved.</li>
+    <li>Hire local guide for history and rituals.</li>
+  </ul>
+</section>
+
+<!-- Gallery -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/pashupatinath/main_temple.jpg" alt="Main Temple">
+    <img src="images/pashupatinath/bagmati_ghats.jpg" alt="Bagmati Ghats">
+    <img src="images/pashupatinath/sadhus.jpg" alt="Sadhus">
+    <img src="images/pashupatinath/temple_festival.jpg" alt="Temple Festival">
+    <img src="images/pashupatinath/wood_carvings.jpg" alt="Wood Carvings">
+    <img src="images/pashupatinath/temple_complex.jpg" alt="Temple Complex">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+// Hero button animation
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+document.querySelector('.hero-btn').addEventListener('click', () => {
+  window.location.href='contact.html';
+});
+
+// Google Maps button scroll
+const mapBtn = document.getElementById('mapBtn');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 300) mapBtn.classList.add('show');
+  else mapBtn.classList.remove('show');
+});
+mapBtn.addEventListener('click', () => {
+  window.open('https://www.google.com/maps/place/Pashupatinath+Temple/@27.710512,85.3462322,617m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39eb191aaaaaaaab:0x424c7d0a60df9091!8m2!3d27.710512!4d85.3488125!16zL20vMGNzX2hz!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
+});
+</script>
+
+</body>
+</html>

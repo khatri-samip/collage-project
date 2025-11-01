@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rara Lake - Discover Nepal</title>
+<link rel="icon" href="images/logo/mainLogo.png">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+
+/* ---------- NAVBAR ---------- */
+.navbar{
+  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
+}
+.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
+.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
+.nav-links{ display:flex; gap:24px; align-items:center; }
+.nav-links a{ color:#fff; font-weight:600; }
+.nav-links a:hover{ color:#ffd700; }
+
+.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
+.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
+.nav-drawer[hidden]{ display:none; }
+.nav-drawer a{ padding:8px 12px; color:#fff; }
+.nav-drawer a:hover{ color:#ffd700; }
+
+@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+
+/* ---------- HERO / TOP SECTION ---------- */
+.hero {
+  position: relative;
+  height:100vh;
+  width:100%;
+  background: url('images/main-images(show)/rara_lake.webp') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding:40px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+.hero-info {
+  position: relative;
+  max-width:500px;
+  z-index:1;
+  text-align:right;
+  opacity:0;
+  animation: fadeIn 1.8s ease forwards;
+}
+.hero-info h2 {
+  font-size:3rem;
+  margin-bottom:20px;
+  color:#03a13d;
+}
+.hero-info p {
+  font-size:1.3rem;
+  line-height:1.8;
+  color:#fff;
+}
+.hero-info .hero-btn {
+  margin-top:20px;
+  padding:12px 25px;
+  font-weight:700;
+  color:#000;
+  background:#32f532;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.hero-info .hero-btn::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border: 2px solid #0bb5e4;
+  border-radius:12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease;
+}
+.hero-info .hero-btn.animate::before {
+  transform: scaleX(1);
+}
+.hero-btn:hover{
+  background-color: #23c6ef;
+  color: rgb(28, 43, 99);
+}
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* ---------- INFO SECTIONS ---------- */
+.info-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  text-align:left;
+}
+.info-section h3 {
+  color:#1a237e;
+  font-size:1.8rem;
+  margin-bottom:12px;
+}
+.info-section p {
+  color:#222;
+  font-size:1.15rem;
+}
+.info-section table { width:100%; border-collapse:collapse; margin-top:15px; }
+.info-section table, th, td { border:1px solid #ccc; }
+.info-section th, td { padding:10px; text-align:left; }
+
+/* ---------- FOOTER ---------- */
+.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
+.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
+.footer a{
+  color:#d37474;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
+  .hero-info { max-width:90%; text-align:center; }
+  .hero-info h2 { font-size:2.2rem; }
+  .hero-info p { font-size:1.1rem; }
+}
+
+/* ---------- FIXED GOOGLE MAP BUTTON ---------- */
+.map-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 1px 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.3s ease;
+  z-index: 1500;
+}
+.map-btn img {
+  width: 22px;
+  height: 22px;
+}
+.map-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.map-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- GALLERY SECTION ---------- */
+.gallery-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.gallery-section h3 {
+  font-size: 1.8rem;
+  color: #1a237e;
+  margin-bottom: 20px;
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
+    <span>Discover Nepal</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travelTips.html">Travel Tips</a>
+  </div>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-drawer" id="nav-drawer" hidden>
+    <a href="cards.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="travel-tips.html">Travel Tips</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-info">
+    <h2>Rara Lake — The Queen of Lakes</h2>
+    <p>Largest lake in Nepal, located in remote Mugu District within Rara National Park, famous for its pristine blue waters and wilderness.</p>
+    <button class="hero-btn">Contact Us</button>
+  </div>
+</section>
+
+<!-- Info Section -->
+<section class="info-section">
+  <h3>Essential Facts</h3>
+  <table>
+    <tr><th>Feature</th><th>Detail</th></tr>
+    <tr><td>Location</td><td>Mugu District, Karnali Province, Western Nepal</td></tr>
+    <tr><td>National Park</td><td>Rara National Park (Nepal's smallest)</td></tr>
+    <tr><td>Altitude (Elevation)</td><td>Approx. 2,990 m (9,810 ft)</td></tr>
+    <tr><td>Size</td><td>Max length 5 km, max width 3 km, area ~10.8 sq km</td></tr>
+    <tr><td>Depth</td><td>Maximum 167 m (548 ft)</td></tr>
+    <tr><td>Significance</td><td>Largest lake in Nepal, often called the "Queen of Lakes"</td></tr>
+  </table>
+
+  <h3>Trekking to Rara Lake</h3>
+  <p>Difficulty: Moderate. Remote trails with steep ascents and descents. Duration: 12–16 days from Kathmandu, shorter via connecting flights.</p>
+
+  <h3>Best Time to Visit</h3>
+  <p>Autumn (Sept–Nov): Mild, clear skies.<br>
+     Spring (Mar–May): Blooming rhododendrons, warmer days.<br>
+     Winter (Dec–Feb): Very cold with snow.<br>
+     Monsoon (Jun–Aug): Heavy rain, slippery trails.</p>
+
+  <h3>Required Permits</h3>
+  <ul>
+    <li>Rara National Park Entry Permit</li>
+    <li>TIMS (Trekkers' Information Management System) Card</li>
+  </ul>
+
+  <h3>Flora & Fauna</h3>
+  <p><strong>Flora:</strong> Lower elevations have Blue Pine, Rhododendrons, Himalayan spruce, juniper, and oak. Higher elevations feature fir, spruce, and pine.</p>
+  <table>
+    <tr><th>Category</th><th>Notable Species</th></tr>
+    <tr><td>Mammals</td><td>Musk Deer, Himalayan Black Bear, Leopard, Red Panda (rare), Himalayan Tahr, Wild Dog, Common Langur, Rhesus Macaque</td></tr>
+    <tr><td>Birds</td><td>Over 200 species including Coots, Snow Cock, Pheasants, Mallards, and migratory waterfowls</td></tr>
+    <tr><td>Aquatic Life</td><td>Three endemic fish species, found nowhere else</td></tr>
+  </table>
+
+  <h3>Activities & Scenic Highlights</h3>
+  <ul>
+    <li>Murma Top Hike: 2-hour uphill hike to Chuchemara Peak (~4,039 m) for panoramic lake views</li>
+    <li>Boating/Paddling: Hire local wooden boats on the calm waters</li>
+    <li>Circumambulation (Lake Walk): Explore the lake shoreline</li>
+    <li>Horse Riding: Offered by local villagers near the lake and Murma Village</li>
+  </ul>
+
+  <h3>Travel & Logistics</h3>
+  <table>
+    <tr><th>Mode of Transport</th><th>Route / Duration</th></tr>
+    <tr><td>Fastest</td><td>Kathmandu → Nepalgunj (1 hr) → Talcha Airport (30–45 min) → Trek to lake (2–3 hrs)</td></tr>
+    <tr><td>Standard Trek</td><td>Kathmandu → Nepalgunj → Jumla Airport → Trek to lake (4–7 days)</td></tr>
+    <tr><td>Overland</td><td>Long jeep journey (2–4 days) to nearest roadhead, then trek to lake</td></tr>
+  </table>
+  <p>Facilities are basic; teahouses or lodges are simple. Carry cash, warm clothing, and first aid kit.</p>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h3>Gallery</h3>
+  <div class="gallery-container">
+    <img src="images/rara/rara_lake1.jpg" alt="Rara Lake View 1">
+    <img src="images/rara/rara_lake2.jpg" alt="Rara Lake View 2">
+    <img src="images/rara/rara_lake3.jpg" alt="Rara Lake View 3">
+    <img src="images/rara/rara_lake4.jpg" alt="Rara Lake View 4">
+    <img src="images/rara/rara_lake5.jpg" alt="Rara Lake View 5">
+    <img src="images/rara/rara_lake6.jpg" alt="Rara Lake View 6">
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-bottom">
+    &copy; 2025 Discover Nepal | <a href="index.html">Back to Home</a>
+  </div>
+</footer>
+
+<!-- Google Maps Button -->
+<button class="map-btn" id="mapBtn">
+  <img src="images/google_maps.webp" alt="Google Maps Logo">
+  View on Maps
+</button>
+
+<!-- JS -->
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('nav-drawer');
+hamburger.addEventListener('click', () => {
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
+  else navDrawer.setAttribute('hidden','');
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
+});
+
+window.addEventListener('load', () => {
+  document.querySelector('.hero-btn').classList.add('animate');
+});
+document.querySelector('.hero-btn').addEventListener('click', function() {
+  window.location.href = 'contact.html';
+});
+
+// Show map button after scrolling
+const mapBtn = document.getElementById('mapBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) mapBtn.classList.add('show');
+  else mapBtn.classList.remove('show');
+});
+
+// Open Rara Lake on Google Maps
+mapBtn.addEventListener('click', () => {
+  window.open('https://www.google.com/maps/place/Rara+Lake/@29.3906,81.1805,14738m/data=!3m1!1e3', '_blank');
+});
+</script>
+
+</body>
+</html>
