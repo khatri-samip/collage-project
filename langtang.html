@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/langtang_valley.webp') center/cover no-repeat;
+  background: url('images/webpage_images/langtang/main-img.jpg') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -179,18 +179,12 @@ th { background:#0a3f5f; color:#fff; }
   margin-bottom: 20px;
 }
 .gallery-container {
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
 }
 .gallery-container img {
   width: 100%;
   border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.gallery-container img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -220,7 +214,7 @@ th { background:#0a3f5f; color:#fff; }
   <div class="hero-info">
     <h2>Langtang Valley</h2>
     <p>The scenic Langtang Valley is Nepal’s closest Himalayan trekking destination, blending mountains, rivers, forests, and rich Tamang culture.</p>
-    <button class="hero-btn">Explore More</button>
+    <button class="hero-btn">Contact Us</button>x
   </div>
 </section>
 
@@ -312,12 +306,12 @@ th { background:#0a3f5f; color:#fff; }
 <section class="gallery-section">
   <h3>Gallery</h3>
   <div class="gallery-container">
-    <img src="images/langtang/langtang_valley1.jpg" alt="Langtang Valley Landscape">
-    <img src="images/langtang/langtang_lirung.jpg" alt="Langtang Lirung Peak">
-    <img src="images/langtang/kyanjin_gompa.jpg" alt="Kyanjin Gompa Monastery">
-    <img src="images/langtang/langtang_river.jpg" alt="Langtang River">
-    <img src="images/langtang/alpine_meadow.jpg" alt="Alpine Meadows">
-    <img src="images/langtang/tamang_village.jpg" alt="Tamang Village">
+    <img src="images/webpage_images/langtang/langtang-1.jpg" alt="Langtang Valley Landscape">
+    <img src="images/webpage_images/langtang/langtang-2.jpg" alt="Langtang Lirung Peak">
+    <img src="images/webpage_images/langtang/langtang-3.jpg" alt="Kyanjin Gompa Monastery">
+    <img src="images/webpage_images/langtang/langtang-4.jpg" alt="Langtang River">
+    <img src="images/webpage_images/langtang/langtang-5.jpg" alt="Alpine Meadows">
+    <img src="images/webpage_images/langtang/langtang-6.jpg" alt="Tamang Village">
   </div>
 </section>
 
@@ -367,7 +361,7 @@ window.addEventListener('scroll', () => {
   else mapBtn.classList.remove('show');
 });
 mapBtn.addEventListener('click', () => {
-  window.open('https://www.google.com/maps/place/Langtang+Valley', '_blank');
+  window.open('https://www.google.com/maps/place/Langtang/@28.2574168,85.4371977,39276m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39eaf53b46ded869:0xe8ce0046c3251d19!8m2!3d28.2062873!4d85.6229296!16s%2Fm%2F04n33gd!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D', '_blank');
 });
 </script>
 

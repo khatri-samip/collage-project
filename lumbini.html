@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/lumbini.webp') center/cover no-repeat;
+  background: url('images/webpage_images/lumbini/main-img.jpg') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -59,7 +59,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 .hero-info h2 {
   font-size:3rem;
   margin-bottom:20px;
-  color:#11f6b1;
+  color:#08f1ab;
 }
 .hero-info p {
   font-size:1.3rem;
@@ -71,7 +71,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   padding:12px 25px;
   font-weight:700;
   color:#000;
-  background:#3adeac;
+  background:#57eec1;
   border:none;
   border-radius:12px;
   cursor:pointer;
@@ -82,7 +82,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   content:"";
   position:absolute;
   inset:0;
-  border: 2px solid #90802a;
+  border: 2px solid #2ab1a4;
   border-radius:12px;
   transform: scaleX(0);
   transform-origin: left;
@@ -182,18 +182,12 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   margin-bottom: 20px;
 }
 .gallery-container {
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
 }
 .gallery-container img {
   width: 100%;
   border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.gallery-container img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -285,12 +279,12 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 <section class="gallery-section">
   <h3>Gallery</h3>
   <div class="gallery-container">
-    <img src="images/lumbini/mayadevi_temple.jpg" alt="Mayadevi Temple">
-    <img src="images/lumbini/ashokan_pillar.jpg" alt="Ashokan Pillar">
-    <img src="images/lumbini/monastery1.jpg" alt="Monastery 1">
-    <img src="images/lumbini/monastery2.jpg" alt="Monastery 2">
-    <img src="images/lumbini/pond.jpg" alt="Sacred Pond">
-    <img src="images/lumbini/buddha_statue.jpg" alt="Buddha Statue">
+    <img src="images/webpage_images/lumbini/lumbini-1.jpg" alt="Mayadevi Temple">
+    <img src="images/webpage_images/lumbini/lumbini-2.jpg" alt="Ashokan Pillar">
+    <img src="images/webpage_images/lumbini/lumbini-3.jpg" alt="Monastery 1">
+    <img src="images/webpage_images/lumbini/lumbini-4.jpg" alt="Monastery 2">
+    <img src="images/webpage_images/lumbini/lumbini-5.jpg" alt="Sacred Pond">
+    <img src="images/webpage_images/lumbini/lumbini-6.jpg" alt="Buddha Statue">
   </div>
 </section>
 
@@ -341,7 +335,7 @@ window.addEventListener('scroll', () => {
   else mapBtn.classList.remove('show');
 });
 mapBtn.addEventListener('click', () => {
-  window.open('https://www.google.com/maps/place/Birthplace+of+Gautama+Buddha/@27.4692426,83.2740439,538m/data=!3m1!1e3!4m6!3m5!1s0x399695c9ba91d0cf:0xfb81e5b97d30869b!8m2!3d27.4693726!4d83.2757839!16s%2Fg%2F11rlztd7nt!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D', '_blank');
+  window.open('https://www.google.com/maps/search/lumbini/@27.4693722,83.2654519,2473m/data=!3m2!1e3!4b1!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D', '_blank');
 });
 </script>
 
