@@ -318,7 +318,215 @@ a{ color:inherit; text-decoration:none; }
   opacity: 1;
   transform: translateY(0);
 }
+  .why-visit {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
 
+  .why-visit h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .why-visit .subtitle {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .why-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .why-card {
+    max-width: 260px;
+    text-align: center;
+  }
+
+  .icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #222;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    margin: 0 auto 1rem auto;
+  }
+  .why-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .why-card p {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  
+  @media (max-width: 900px) {
+    .why-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+    /* ---------- RESET (limited scope) ---------- */
+    .tour-packages * {
+      box-sizing: border-box;
+    }
+
+    /* ---------- BASE ---------- */
+    .tour-packages {
+      font-family: "Poppins", sans-serif;
+      background-color: #f7f8fa;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .tour-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .tour-subtitle {
+      font-size: 1rem;
+      color: #555;
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ---------- PRICING SECTION ---------- */
+    .tour-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .tour-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      width: 320px;
+      padding: 2rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tour-badge {
+      display: inline-block;
+      background: #f3f4f6;
+      color: #111;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      padding: 4px 10px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .tour-popular::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+
+    .tour-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .tour-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    .tour-duration {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .tour-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .tour-features li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tour-features li::before {
+      content: "✔";
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    .tour-btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-align: center;
+      border: 3px solid black;
+    }
+
+    .tour-btn:hover {
+      background: #fefefe;
+      color: black;
+    }
+
+    .tour-highlight {
+      border: 2px solid #000;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 950px) {
+      .tour-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
 /* ---------- INFINITE ANIMATED BUTTON (.contact-us) ---------- */
 .contact-us {
   margin-top: 1rem;

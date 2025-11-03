@@ -28,6 +28,39 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 
 @media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
 
+/* ---------- TOUR PACKAGES ---------- */
+.tour-packages * { box-sizing: border-box; }
+
+.tour-packages { font-family: "Poppins", sans-serif; background-color: #f7f8fa; color: #111; display: flex; flex-direction: column; align-items: center; padding: 2rem; margin-top: 4rem; }
+
+.tour-title { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem; text-align: center; }
+.tour-subtitle { font-size: 1rem; color: #555; text-align: center; max-width: 600px; margin-bottom: 2.5rem; }
+
+.tour-cards { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; align-items: stretch; }
+
+.tour-card { background: #fff; border: 1px solid #ddd; border-radius: 12px; width: 320px; padding: 2rem; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease; position: relative; }
+
+.tour-badge { display: inline-block; background: #f3f4f6; color: #111; font-size: 0.8rem; border-radius: 8px; padding: 4px 10px; margin-bottom: 10px; font-weight: 500; }
+
+.tour-popular::before { content: "Most Popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #000; color: #fff; font-size: 0.8rem; font-weight: 600; padding: 4px 10px; border-radius: 10px; }
+
+.tour-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 600; }
+
+.tour-price { font-size: 2.2rem; font-weight: 700; margin-top: 0.5rem; }
+
+.tour-duration { font-size: 0.95rem; margin-bottom: 1rem; color: #555; }
+
+.tour-features { list-style: none; margin-bottom: 1.5rem; }
+.tour-features li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.tour-features li::before { content: "✔"; color: #27ae60; font-weight: bold; }
+
+.tour-btn { display: block; width: 100%; padding: 0.8rem; border: none; border-radius: 8px; background: #111; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.3s; text-align: center; border: 3px solid black; }
+.tour-btn:hover { background: #fefefe; color: black; }
+
+.tour-highlight { border: 2px solid #000; }
+
+@media (max-width: 950px) { .tour-cards { flex-direction: column; align-items: center; } }
+
 /* ---------- CONTACT FORM ---------- */
 .container { max-width:900px; margin:120px auto 60px; padding:0 20px; }
 .contact-section { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px; }
@@ -35,43 +68,28 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 .contact-info p { margin-bottom:10px; font-size:1.1rem; }
 .contact-form { padding:25px; background:#f8f8f8; border-radius:10px; }
 .contact-form input, .contact-form textarea { width:100%; padding:12px; margin:8px 0 15px; border:1px solid #ccc; border-radius:6px; font-size:1rem; }
-.contact-form input:focus, .contact-form textarea:focus { outline:2px solid #34d00d; border-color:#34d00d; }
-.contact-form button { width:100%; background:#34d00d; color:#fff; font-weight:600; border:none; border-radius:6px; padding:12px; cursor:pointer;
+.contact-form input:focus, .contact-form textarea:focus { outline:2px solid #071902; border-color:#34d00d; }
+.contact-form button { width:100%; background:#000000; color:#fff; font-weight:600; border:none; border-radius:6px; padding:12px; cursor:pointer;border: 2px solid black;transition: 0.1s ease-in; }
+.contact-form button:hover{
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  transform: scale(1.01);
 }
-.contact-info a{
-  font-size: 1.3rem;
-  text-decoration: none;
-  color: inherit;
-  font-weight: bolder;
-}
-.contact-info span{
-  transition: 0.1s ease-in;
-}
-.contact-info span:hover{
-  transform: scale(1.05);
-  text-decoration: underline;
-}
-/* ---------- INFO SECTIONS ---------- */
-.info-section { max-width:900px; margin:60px auto; padding:0 20px; display:flex; flex-direction:column; gap:25px; text-align:left; }
-.info-section h3 { color:#1a237e; font-size:1.5rem; margin-bottom:10px; }
-.info-section p, .info-section ul, .info-section li { color:#222; font-size:1.1rem; line-height:1.5; }
-.info-section ul { margin-left:20px; list-style: disc; }
 
-/* ---------- SOCIAL HANDLES ---------- */
-.social-handles img { width:50px; height:4-px;
-}
-textarea{
-  resize: none;
-}
-/* ---------- FOOTER ---------- */
+.contact-info a{ font-size: 1.3rem; text-decoration: none; color: inherit; font-weight: bolder; }
+.contact-info span{ transition: 0.1s ease-in; }
+.contact-info span:hover{ transform: scale(1.05); text-decoration: underline; }
+
+.social-handles img { width:50px; height:50px; }
+
+textarea{ resize: none; }
+
 .footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
 .footer-bottom{ text-align:center; margin-top:30px; color:#888;}
 .footer a{ color:#d37474; }
 
-/* ---------- Responsive ---------- */
-@media(max-width:768px){ 
-  .contact-section{ grid-template-columns:1fr; } 
-}
+@media(max-width:768px){ .contact-section{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -105,7 +123,6 @@ textarea{
       <p><strong>Location:</strong> Kathmandu, Nepal</p>
       <p>Our team is happy to assist you with trip planning, inquiries, and bookings.</p>
 
-      <!-- Our Social Handles -->
       <div class="social-handles" style="margin-top:30px;">
         <h3 style="color:#1a237e; margin-bottom:12px;">Our Social Handles</h3>
         <div style="display:flex; flex-direction:column; gap:15px;">
@@ -134,29 +151,77 @@ textarea{
     </form>
   </div>
 
-  <!-- Our Services & Why Choose Us Section -->
-  <section class="info-section">
-    <h3>Our Services</h3>
-    <p><strong>Guided Tours:</strong> Explore Nepal with expert local guides who provide rich cultural, historical, and natural insights.</p>
-    <p><strong>Custom Trips:</strong> Personalized itineraries including trekking, adventure, and cultural experiences tailored to your preferences.</p>
-    <p><strong>Hotel & Transport:</strong> Comfortable stays and reliable transport arranged for hassle-free travel.</p>
-    
-    <p><strong>Popular Destinations Routes by Province:</strong></p>
-    <ul>
-      <li><strong>Province 1:</strong> Biratnagar → Ilam → Dharan → Koshi Tappu Wildlife Reserve</li>
-      <li><strong>Province 2:</strong> Janakpur → Lahan → Siraha → Chitwan National Park</li>
-      <li><strong>Bagmati Province:</strong> Kathmandu → Bhaktapur → Patan → Nagarkot → Dhulikhel</li>
-      <li><strong>Gandaki Province:</strong> Pokhara → Sarangkot → Annapurna Base Camp → Bandipur</li>
-      <li><strong>Lumbini Province:</strong> Lumbini → Tansen → Palpa → Butwal</li>
-      <li><strong>Karnali Province:</strong> Jumla → Rara Lake → Mugu → Dolpa</li>
-      <li><strong>Sudurpashchim Province:</strong> Dhangadhi → Ghodaghodi Lake → Khaptad National Park → Baitadi</li>
-    </ul>
+  <!-- Tour Packages Section -->
+  <section class="tour-packages">
+    <h2 class="tour-title">Tour Packages</h2>
+    <p class="tour-subtitle">Choose from our carefully curated tour packages designed to give you the best Nepal experience.</p>
 
-    <h3>Why Choose Us</h3>
-    <p><strong>Experienced Guides:</strong> Our licensed local experts ensure safe and authentic experiences across Nepal.</p>
-    <p><strong>Authentic Experiences:</strong> We focus on cultural immersion, local cuisine, and off-the-beaten-path adventures.</p>
-    <p><strong>24/7 Support:</strong> Our team is always available to assist with bookings, travel tips, and emergency support.</p>
-    <p><strong>Tailored Itineraries:</strong> Every trip is customized to your needs and interests for a truly unique experience.</p>
+    <div class="tour-cards">
+      <!-- CARD 1 -->
+      <div class="tour-card">
+        <span class="tour-badge">Cultural</span>
+        <h3>Essential Nepal</h3>
+        <p class="tour-price">$899 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">7 Days</p>
+        <ul class="tour-features">
+          <li>Kathmandu city tour</li>
+          <li>Bhaktapur & Patan visits</li>
+          <li>Swayambhunath Temple</li>
+          <li>Hotel accommodations</li>
+          <li>Daily breakfast</li>
+          <li>English-speaking guide</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="tour-card tour-highlight tour-popular">
+        <span class="tour-badge">Trekking</span>
+        <h3>Himalayan Adventure</h3>
+        <p class="tour-price">$1899 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">14 Days</p>
+        <ul class="tour-features">
+          <li>Everest Base Camp trek</li>
+          <li>Scenic mountain flights</li>
+          <li>Experienced trekking guides</li>
+          <li>Tea house accommodations</li>
+          <li>All meals during trek</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="tour-card">
+        <span class="tour-badge">Premium</span>
+        <h3>Complete Nepal Experience</h3>
+        <p class="tour-price">$2499 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">21 Days</p>
+        <ul class="tour-features">
+          <li>Kathmandu & Pokhara tours</li>
+          <li>Annapurna Circuit trek</li>
+          <li>Chitwan jungle safari</li>
+          <li>Luxury accommodations</li>
+          <li>All meals included</li>
+          <li>Private transportation</li>
+          <li>Cultural performances</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="tour-card">
+        <span class="tour-badge">Custom</span>
+        <h3>Custom Inquiry</h3>
+        <p class="tour-price">—</p>
+        <p class="tour-duration">Flexible</p>
+        <ul class="tour-features">
+          <li>Choose your destinations</li>
+          <li>Custom itinerary</li>
+          <li>Flexible duration</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -167,19 +232,55 @@ textarea{
   </div>
 </footer>
 
-<!-- JS -->
 <script>
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => { if(window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+window.addEventListener('scroll', () => { 
+  if(window.scrollY > 50) navbar.classList.add('scrolled'); 
+  else navbar.classList.remove('scrolled'); 
+});
 
 const hamburger = document.getElementById('hamburger');
 const navDrawer = document.getElementById('nav-drawer');
-hamburger.addEventListener('click', () => { if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden'); else navDrawer.setAttribute('hidden',''); });
-document.querySelectorAll('.nav-drawer a').forEach(link => { link.addEventListener('click', () => navDrawer.setAttribute('hidden','')); });
+hamburger.addEventListener('click', () => { 
+  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden'); 
+  else navDrawer.setAttribute('hidden',''); 
+});
+document.querySelectorAll('.nav-drawer a').forEach(link => { 
+  link.addEventListener('click', () => navDrawer.setAttribute('hidden','')); 
+});
 
-// Demo form submission
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', e => { e.preventDefault(); alert("Thank you for contacting Discover Nepal! (Demo only)"); form.reset(); });
+// Tour package buttons
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".tour-btn");
+
+  const packages = [
+    { name: "Essential Nepal", duration: "7 Days", price: "$899", type: "fixed" },
+    { name: "Himalayan Adventure", duration: "14 Days", price: "$1,899", type: "fixed" },
+    { name: "Complete Nepal Experience", duration: "21 Days", price: "$2,499", type: "fixed" },
+    { name: "Custom", duration: "Flexible", price: "Quoted", type: "custom",
+      options: [
+        "Essential Nepal","Himalayan Adventure","Complete Nepal Experience",
+        "Mount Everest Base Camp","Kathmandu Valley","Pokhara",
+        "Annapurna Circuit","Culture Tour","Custom Package"
+      ]
+    }
+  ];
+
+  buttons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      const pkg = packages[index];
+      if(pkg.type === "fixed") {
+        const url = `booknow.html?name=${encodeURIComponent(pkg.name)}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
+        window.location.href = url;
+      } else if(pkg.type === "custom") {
+        const options = pkg.options.map(encodeURIComponent).join(",");
+        const url = `booknow.html?custom=1&options=${options}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
+        window.location.href = url;
+      }
+    });
+  });
+});
+
 </script>
 
 </body>

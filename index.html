@@ -6,6 +6,7 @@
 <title>Discover Nepal – Travel, Culture & Adventure</title>
 <link rel="icon" href="images/logo/mainLogo.png" type="image/png">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
 </head>
 <body>
 
@@ -60,6 +61,109 @@
     <img src="images/moving_animation/village.webp" alt="">
   </div>
 </div>
+<section class="why-visit">
+  <h2>Why Visit Nepal?</h2>
+  <p class="subtitle">Discover what makes Nepal one of the most extraordinary destinations in the world.</p>
+
+  <div class="why-container">
+    <div class="why-card">
+      <div class="icon-circle"><i class="bi bi-signpost-split-fill"></i></div>
+      <h3>Majestic Himalayas</h3>
+      <p>Home to 8 of the world's 10 highest peaks, including Mount Everest, offering unparalleled mountain views.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="icon-circle"><i class="bi bi-heart-fill"></i></div>
+      <h3>Rich Cultural Heritage</h3>
+      <p>Ancient temples, monasteries, and UNESCO World Heritage sites showcase thousands of years of history.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="icon-circle"><i class="bi bi-geo-alt-fill"></i></div>
+      <h3>Diverse Landscapes</h3>
+      <p>From snow-capped peaks to lush jungles, experience incredible geographical diversity in one country.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="icon-circle"><i class="bi bi-people-fill"></i></div>
+      <h3>Warm Hospitality</h3>
+      <p>Experience the genuine warmth and friendliness of Nepali people and their unique culture.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tour-packages">
+    <h2 class="tour-title">Tour Packages</h2>
+    <p class="tour-subtitle">Choose from our carefully curated tour packages designed to give you the best Nepal experience.</p>
+
+    <div class="tour-cards">
+      <!-- CARD 1 -->
+      <div class="tour-card">
+        <span class="tour-badge">Cultural</span>
+        <h3>Essential Nepal</h3>
+        <p class="tour-price">$899 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">7 Days</p>
+        <ul class="tour-features">
+          <li>Kathmandu city tour</li>
+          <li>Bhaktapur & Patan visits</li>
+          <li>Swayambhunath Temple</li>
+          <li>Hotel accommodations</li>
+          <li>Daily breakfast</li>
+          <li>English-speaking guide</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="tour-card tour-highlight tour-popular">
+        <span class="tour-badge">Trekking</span>
+        <h3>Himalayan Adventure</h3>
+        <p class="tour-price">$1899 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">14 Days</p>
+        <ul class="tour-features">
+          <li>Everest Base Camp trek</li>
+          <li>Scenic mountain flights</li>
+          <li>Experienced trekking guides</li>
+          <li>Tea house accommodations</li>
+          <li>All meals during trek</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="tour-card">
+        <span class="tour-badge">Premium</span>
+        <h3>Complete Nepal Experience</h3>
+        <p class="tour-price">$2499 <span style="font-size:1rem;">/ person</span></p>
+        <p class="tour-duration">21 Days</p>
+        <ul class="tour-features">
+          <li>Kathmandu & Pokhara tours</li>
+          <li>Annapurna Circuit trek</li>
+          <li>Chitwan jungle safari</li>
+          <li>Luxury accommodations</li>
+          <li>All meals included</li>
+          <li>Private transportation</li>
+          <li>Cultural performances</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="tour-card" style="margin-top: 2rem;">
+        <span class="tour-badge">Custom</span>
+        <h3>Custom Inquiry</h3>
+        <p class="tour-price">—</p>
+        <p class="tour-duration">Flexible</p>
+        <ul class="tour-features">
+          <li>Choose your destinations</li>
+          <li>Custom itinerary</li>
+          <li>Flexible duration</li>
+        </ul>
+        <button class="tour-btn">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <h1 style="text-align: center;">Explore the Essence of Nepal</h1>
 
 <!-- LANDSCAPES -->
 <section class="section reveal" id="landscapes">
@@ -210,6 +314,38 @@ hamburger.addEventListener('click',()=>{
   hamburger.setAttribute('aria-expanded', String(!expanded));
   drawer.toggleAttribute('hidden');
 });
+
+ document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".tour-btn");
+
+  const packages = [
+    { name: "Essential Nepal", duration: "7 Days", price: "$899", type: "fixed" },
+    { name: "Himalayan Adventure", duration: "14 Days", price: "$1,899", type: "fixed" },
+    { name: "Complete Nepal Experience", duration: "21 Days", price: "$2,499", type: "fixed" },
+    { name: "Custom", duration: "Flexible", price: "Quoted", type: "custom",
+      options: [
+        "Essential Nepal","Himalayan Adventure","Complete Nepal Experience",
+        "Mount Everest Base Camp","Kathmandu Valley","Pokhara",
+        "Annapurna Circuit","Culture Tour","Custom Package"
+      ]
+    }
+  ];
+
+  buttons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      const pkg = packages[index];
+      if(pkg.type === "fixed") {
+        const url = `booknow.html?name=${encodeURIComponent(pkg.name)}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
+        window.location.href = url;
+      } else if(pkg.type === "custom") {
+        const options = pkg.options.map(encodeURIComponent).join(",");
+        const url = `booknow.html?custom=1&options=${options}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
+        window.location.href = url;
+      }
+    });
+  });
+});
+
 
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
