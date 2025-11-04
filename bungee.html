@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/bungee_hero.jpg') center/cover no-repeat;
+  background: url('images/webpage_images/bungee/main-img.jpg') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -226,6 +226,25 @@ html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
+<!-- PRELOADER -->
+<div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
+  <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div class="loader-text" style="margin-top:12px;color:#ffb74d;font-weight:700;">Discover Nepal</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity='0';
+  preloader.style.visibility='hidden';
+  preloader.style.pointerEvents='none';
+});
+
+// Spinner rotation animation
+const style=document.createElement('style');
+style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
+document.head.appendChild(style);
+</script>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
@@ -298,28 +317,35 @@ html { scroll-behavior: smooth; }
   <h3>Popular Bungee Jump Locations</h3>
 
   <div class="bungee-section">
-    <img src="images/bungee/last_resort.jpg" alt="The Last Resort Bungee">
+    <img src="images/webpage_images/bungee/bhote koshi.jpg" alt="The Last Resort Bungee">
     <h4>The Last Resort - Bhote Koshi</h4>
     <p>World-famous bungee site, 160m above the Bhote Koshi river. Perfect for thrill-seekers and adventure lovers.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/The+Last+Resort+Nepal','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/The+Last+Resort+Office/@27.7149898,84.9795376,78947m/data=!3m1!1e3!4m13!1m2!2m1!1sThe+Last+Resort+-+Bhote+Koshi!3m9!1s0x39eb18fce2813fab:0xff3f22f429c046bd!5m2!4m1!1i2!8m2!3d27.715091!4d85.3108342!15sCh1UaGUgTGFzdCBSZXNvcnQgLSBCaG90ZSBLb3NoaVodIht0aGUgbGFzdCByZXNvcnQgYmhvdGUga29zaGmSARpvdXRkb29yX2FjdGl2aXR5X29yZ2FuaXplcpoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VNdGJ6ZHljRFpSUlJBQqoBcAoJL20vMDJka3JtEAEqHyIbdGhlIGxhc3QgcmVzb3J0IGJob3RlIGtvc2hpKAAyHxABIhsEvSO2w0EIsNtd6C4y4rX0G-8VZChfsMuzQAQyHxACIht0aGUgbGFzdCByZXNvcnQgYmhvdGUga29zaGngAQD6AQUI7AIQQQ!16s%2Fg%2F11b6glh49j!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>
 
-  <div class="bungee-section">
-    <img src="images/bungee/upper_trishuli.jpg" alt="Upper Trishuli Bungee">
-    <h4>Upper Trishuli Bungee</h4>
-    <p>High-adrenaline jump over Trishuli river gorge with breathtaking views of the surrounding hills.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Trishuli+River','_blank')">
-      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
-    </button>
-  </div>
+ <div class="bungee-section">
+  <img src="images/webpage_images/bungee/kusma.jpg" alt="Kushma Bungee Jump">
+  <h4>Kushma Bungee Jump</h4>
+  <p>
+    Kushma Bungee Jump is Nepal’s highest and the world’s second-highest bungee jump at a height of <b>228 meters</b>.
+    Located between the <b>Baglung</b> and <b>Kushma</b> districts, it offers breathtaking views of the <b>Kaligandaki River Gorge</b>.
+    The 520-meter suspension bridge connects the two districts and serves as the jump platform.
+    Prices start at <b>Rs 8000 per person</b>, with optional photos, videos, and T-shirts available for Rs 1500.
+    Open 7 days a week, this thrilling jump can be reached within 2 hours from Pokhara.
+  </p>
+  <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Kusma+Bungee/@27.5167363,81.4041143,726808m/data=!3m1!1e3!4m10!1m2!2m1!1skushma+bungee+jump!3m6!1s0x39eb19abb480e585:0xf6df9423fe217e27!8m2!3d27.7142143!4d85.3123487!15sChJrdXNobWEgYnVuZ2VlIGp1bXBaFCISa3VzaG1hIGJ1bmdlZSBqdW1wkgENdHJhdmVsX2FnZW5jeZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VOWWF6bFFja1JCRUFFqgFMEAEqDyILYnVuZ2VlIGp1bXAoADIfEAEiG25fJgJL59TfCiEiRVL6npB_TzAD2189g2fkCjIWEAIiEmt1c2htYSBidW5nZWUganVtcOABAPoBBQi2AxBL!16s%2Fg%2F11ft54v70j!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
+    <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
+  </button>
+</div>
+
 
   <div class="bungee-section">
-    <img src="images/bungee/suspension_bridge.jpg" alt="Suspension Bridge Bungee">
+    <img src="images/webpage_images/bungee/suspension.jpg" alt="Suspension Bridge Bungee">
     <h4>Suspension Bridge Jumps</h4>
     <p>Smaller but thrilling jumps over suspension bridges in scenic river valleys, ideal for first-time jumpers.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/search/Bungee+jumping+Nepal','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/The+Cliff+Resort+%7C+Bungy+%7C+Sales+Office/@28.2150404,83.9583948,19646m/data=!3m1!1e3!4m13!1m2!2m1!1sbungeee+jump!3m9!1s0x3995957035d48781:0x4d49d5e7a554780a!5m2!4m1!1i2!8m2!3d28.2150404!4d83.9583948!15sCgtidW5nZWUganVtcFoNIgtidW5nZWUganVtcJIBF2FkdmVudHVyZV9zcG9ydHNfY2VudGVymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5UVVJuTkdaSU5UUkJSUkFCqgFDEAEqDyILYnVuZ2VlIGp1bXAoADIdEAEiGQACWuxW2i-gv_D-Y1KOGJNUAmWz3WEuRbYyDxACIgtidW5nZWUganVtcOABAPoBBAgAEDc!16s%2Fg%2F11f69694zq!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>

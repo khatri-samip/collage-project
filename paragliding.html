@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/paragliding_hero.jpg') center/cover no-repeat;
+  background: url('images/webpage_images/paragliding/main_img.jpg') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -227,6 +227,25 @@ html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
+<!-- PRELOADER -->
+<div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
+  <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div class="loader-text" style="margin-top:12px;color:#ffb74d;font-weight:700;">Discover Nepal</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity='0';
+  preloader.style.visibility='hidden';
+  preloader.style.pointerEvents='none';
+});
+
+// Spinner rotation animation
+const style=document.createElement('style');
+style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
+document.head.appendChild(style);
+</script>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
@@ -282,46 +301,37 @@ html { scroll-behavior: smooth; }
   <h3>Popular Paragliding Places</h3>
 
   <div class="place-section">
-    <img src="images/paragliding/pokhara.jpg" alt="Pokhara Paragliding">
+    <img src="images/webpage_images/paragliding/pokhara.jpg" alt="Pokhara Paragliding">
     <h4>Pokhara</h4>
     <p>The paragliding capital of Nepal. Glide above Phewa Lake with breathtaking views of Annapurna and Machhapuchhre mountains.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Pokhara','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Open+Sky+Paragliding/@28.2166569,83.9503161,1410m/data=!3m1!1e3!4m10!1m2!2m1!1spokhara+paragliding!3m6!1s0x3995951d7f48076d:0x1d848a5b341a7d8!8m2!3d28.2154824!4d83.9583101!15sChNwb2toYXJhIHBhcmFnbGlkaW5nWhUiE3Bva2hhcmEgcGFyYWdsaWRpbmeSARdhZHZlbnR1cmVfc3BvcnRzX2NlbnRlcqoBWwoNL2cvMTFyOG1nenh5bBABKg8iC3BhcmFnbGlkaW5nKAAyHhABIhpS1SrnFvX9188XmDnX4-x-8JsI6ROu6DiGSzIXEAIiE3Bva2hhcmEgcGFyYWdsaWRpbmfgAQA!16s%2Fg%2F11csrxzwhh!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
     </button>
   </div>
 
   <div class="place-section">
-    <img src="images/paragliding/sirkot.jpg" alt="Sirkot Paragliding">
+    <img src="images/webpage_images/paragliding/sirkot.jpg" alt="Sirkot Paragliding">
     <h4>Sirkot</h4>
     <p>A quiet alternative to Pokhara, known for early morning flights above misty valleys and scenic ridges.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Sirkot','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Sirkot/@28.0237719,83.7330178,615m/data=!3m1!1e3!4m14!1m7!3m6!1s0x3995db06a95c8d91:0x578e0596efc3989c!2sSirkot!8m2!3d28.0261002!4d83.7234048!16s%2Fg%2F11clyh1_qy!3m5!1s0x3995db06a95c8d91:0x578e0596efc3989c!8m2!3d28.0261002!4d83.7234048!16s%2Fg%2F11clyh1_qy!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
     </button>
   </div>
 
   <div class="place-section">
-    <img src="images/paragliding/bandipur.jpg" alt="Bandipur Paragliding">
+    <img src="images/webpage_images/paragliding/bandipur.jpg" alt="Bandipur Paragliding">
     <h4>Bandipur</h4>
     <p>Fly over an ancient hilltop town with panoramic mountain views and tranquil countryside landscapes.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Bandipur','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Bandipur+paragliding/@27.9278437,84.3911222,1231m/data=!3m1!1e3!4m14!1m7!3m6!1s0x399505752b4205b1:0xdcf83774f9584522!2sBandipur+paragliding!8m2!3d27.928007!4d84.3907757!16s%2Fg%2F11rqggxlhr!3m5!1s0x399505752b4205b1:0xdcf83774f9584522!8m2!3d27.928007!4d84.3907757!16s%2Fg%2F11rqggxlhr!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
     </button>
   </div>
 
   <div class="place-section">
-    <img src="images/paragliding/kotdanda.jpg" alt="Kot Danda Kathmandu Paragliding">
+    <img src="images/webpage_images/paragliding/kathmandu.jpg" alt="Kot Danda Kathmandu Paragliding">
     <h4>Kot Danda (Kathmandu)</h4>
     <p>Perfect for quick flights near the capital — enjoy bird’s-eye views of Kathmandu Valley and surrounding hills.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Kot+Danda','_blank')">
-      <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
-    </button>
-  </div>
-
-  <div class="place-section">
-    <img src="images/paragliding/dharan.jpg" alt="Dharan Paragliding">
-    <h4>Dharan</h4>
-    <p>Eastern Nepal’s paragliding site, offering flights over the lush hills and scenic plains below.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Dharan','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Kathmandu+Paragliding+Take+Off+Spot+(+Lekh+dada+)/@27.5956876,85.2896627,19758m/data=!3m1!1e3!4m10!1m2!2m1!1sKot+Danda+paragliding!3m6!1s0x39eb11a3c7707fdd:0xa2f5d725598ffcca!8m2!3d27.5942126!4d85.4032563!15sChVLb3QgRGFuZGEgcGFyYWdsaWRpbmdaFyIVa290IGRhbmRhIHBhcmFnbGlkaW5nkgELaGlraW5nX2FyZWGaASRDaGREU1VoTk1HOW5TMFZLZG5GNGNsaDRjSFl6VVhKM1JSQUKqAU8QASoPIgtwYXJhZ2xpZGluZygAMh8QASIbMmBPhJiFtAgO6sa3-1OYU1LNz7OYtbiQQnMJMhkQAiIVa290IGRhbmRhIHBhcmFnbGlkaW5n4AEA-gEFCPcEEEw!16s%2Fg%2F11gfn8frrq!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps"> View on Maps
     </button>
   </div>

@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/rafting_hero.jpg') center/cover no-repeat;
+  background: url('images/webpage_images/rafting/main_img.jpg') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -226,6 +226,25 @@ html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
+<!-- PRELOADER -->
+<div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
+  <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div class="loader-text" style="margin-top:12px;color:#ffb74d;font-weight:700;">Discover Nepal</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity='0';
+  preloader.style.visibility='hidden';
+  preloader.style.pointerEvents='none';
+});
+
+// Spinner rotation animation
+const style=document.createElement('style');
+style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
+document.head.appendChild(style);
+</script>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
@@ -298,37 +317,37 @@ html { scroll-behavior: smooth; }
   <h3>Popular Rafting Rivers</h3>
 
   <div class="raft-section">
-    <img src="images/rafting/trishuli.jpg" alt="Trishuli River">
+    <img src="images/webpage_images/rafting/trishuli-river-rafting.jpg" alt="Trishuli River">
     <h4>Trishuli River</h4>
     <p>One of Nepal’s most popular rafting rivers, suitable for beginners and intermediates. Surrounded by beautiful hills and villages.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Trishuli+River','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Trishuli/@28.0703128,84.4932745,103830m/data=!3m1!1e3!4m14!1m7!3m6!1s0x3995204ceea6a129:0xe1f5cc8ca30e0b91!2sTrishuli!8m2!3d28.0242592!4d85.1863713!16s%2Fm%2F0c009c7!3m5!1s0x3995204ceea6a129:0xe1f5cc8ca30e0b91!8m2!3d28.0242592!4d85.1863713!16s%2Fm%2F0c009c7!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3DRFNVaE5NRzluUzBWSlEwRm5TVVJ5WDA1MloyZDNSUkFCqgFMEAEqCyIHcmFmdGluZygAMh8QASIblVyxlIY2uSdAW2HvreBvfH7BXZNhbB0CNBSRMhoQAiIWdHJpc2h1bGkgcml2ZXIgcmFmdGluZ-ABAPoBBAhyEEw!16s%2Fg%2F11stttszs0!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>
 
   <div class="raft-section">
-    <img src="images/rafting/bhotekoshi.jpg" alt="Bhote Koshi River">
+    <img src="images/webpage_images/rafting/bhote koshi river.jpg" alt="Bhote Koshi River">
     <h4>Bhote Koshi River</h4>
     <p>Famous for adrenaline-pumping rapids, perfect for adventure seekers. Known as the Himalayan thrill river.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Bhote+Koshi+River','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Bhotekoshi+River/@28.0400161,85.6105488,39355m/data=!3m1!1e3!4m10!1m2!2m1!1sBhote+Koshi+River!3m6!1s0x39ea4e7388acb54b:0x117ca6a550aac664!8m2!3d28.0400019!4d85.7761699!15sChFCaG90ZSBLb3NoaSBSaXZlcpIBBXJpdmVyqgE5EAEyHhABIhoM4I0nUvGUMOtafSpUa9yy3HviokLxhVFITzIVEAIiEWJob3RlIGtvc2hpIHJpdmVy4AEA!16s%2Fg%2F11bw8d7qcm!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>
 
   <div class="raft-section">
-    <img src="images/rafting/sunkoshi.jpg" alt="Sun Koshi River">
+    <img src="images/webpage_images/rafting/sunkoshi.jpg" alt="Sun Koshi River">
     <h4>Sun Koshi River</h4>
     <p>Longest rafting river in Nepal, offering multi-day trips through stunning gorges and remote villages.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Sun+Koshi+River','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Sunkoshi/@26.9127182,87.1360723,4970m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39ef399c2d1250bf:0xe786eda9a529b6db!8m2!3d26.9127202!4d87.1567149!16s%2Fm%2F0c027q_!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>
 
   <div class="raft-section">
-    <img src="images/rafting/seti.jpg" alt="Seti River">
+    <img src="images/webpage_images/rafting/seti-river.jpg" alt="Seti River">
     <h4>Seti River</h4>
     <p>Shorter rafting trips ideal for beginners. White rapids and scenic surroundings make it a great day trip.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Seti+River','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Seti+Gandaki+River/@27.8567679,84.2093214,39422m/data=!3m2!1e3!4b1!4m6!3m5!1s0x39950143c9c7c855:0x2a855426992b95b3!8m2!3d27.8681871!4d84.3668981!16s%2Fm%2F0v3f3lb!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>

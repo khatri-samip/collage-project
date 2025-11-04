@@ -33,7 +33,7 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   position: relative;
   height:100vh;
   width:100%;
-  background: url('images/main-images(show)/zipline_hero.jpg') center/cover no-repeat;
+  background: url('images/webpage_images/zipline/main-img.webp') center/cover no-repeat;
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
@@ -226,6 +226,25 @@ html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
+<!-- PRELOADER -->
+<div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
+  <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div class="loader-text" style="margin-top:12px;color:#ffb74d;font-weight:700;">Discover Nepal</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const preloader = document.getElementById('preloader');
+  preloader.style.opacity='0';
+  preloader.style.visibility='hidden';
+  preloader.style.pointerEvents='none';
+});
+
+// Spinner rotation animation
+const style=document.createElement('style');
+style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
+document.head.appendChild(style);
+</script>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
@@ -298,28 +317,19 @@ html { scroll-behavior: smooth; }
   <h3>Popular Zipline Locations</h3>
 
   <div class="zipline-section">
-    <img src="images/zipline/last_resort_zipline.jpg" alt="The Last Resort Zipline">
+    <img src="images/webpage_images/zipline/lastresort.jpg" alt="The Last Resort Zipline">
     <h4>The Last Resort - Bhote Koshi</h4>
     <p>One of the world’s highest ziplines, offering spectacular views of Bhote Koshi river gorge and surrounding mountains.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/The+Last+Resort+Nepal','_blank')">
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/The+Last+Resort+Office/@27.6849517,84.8994837,52100m/data=!3m1!1e3!4m13!1m2!2m1!1sThe+Last+Resort+!3m9!1s0x39eb18fce2813fab:0xff3f22f429c046bd!5m2!4m1!1i2!8m2!3d27.715091!4d85.3108342!15sCg9UaGUgTGFzdCBSZXNvcnSSARpvdXRkb29yX2FjdGl2aXR5X29yZ2FuaXplcqoBVwoJL20vMDJka3JtEAEqEyIPdGhlIGxhc3QgcmVzb3J0KAAyHhABIhqU8F9_PqTm2nUoqEL6Kyv-4nEomT_53KAh1jITEAIiD3RoZSBsYXN0IHJlc29ydOABAA!16s%2Fg%2F11b6glh49j!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>
 
   <div class="zipline-section">
-    <img src="images/zipline/pokhara_zipline.jpg" alt="Pokhara Zipline">
+    <img src="images/webpage_images/zipline/macchapuchre.webp" alt="Pokhara Zipline">
     <h4>Pokhara Zipline</h4>
-    <p>Longest zipline in Asia with 1.8 km of adrenaline-pumping ride across rivers, valleys, and hills with Annapurna range backdrop.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Pokhara','_blank')">
-      <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
-    </button>
-  </div>
-
-  <div class="zipline-section">
-    <img src="images/zipline/shivapuri_zipline.jpg" alt="Shivapuri Zipline">
-    <h4>Shivapuri Adventure Park</h4>
-    <p>Zipline adventure in the lush Shivapuri National Park, combining thrilling heights and scenic forested views.</p>
-    <button class="map-btn" onclick="window.open('https://www.google.com/maps/place/Shivapuri+National+Park','_blank')">
+    <p>Prepare for the ultimate adrenaline rush. This is a high-velocity, near-freefall experience designed for maximum speed. Get ready to launch and fly like nothing you've ever felt before..</p>
+    <button class="map-btn" onclick="window.open('https:www.google.com/maps/place/Highground+Zipflyer+Takeoff+Station/@28.2512879,83.8704925,9819m/data=!3m1!1e3!4m10!1m2!2m1!1spokhara+zipline!3m6!1s0x399594af621f4f0b:0xb083e329e0352077!8m2!3d28.2512879!4d83.9425903!15sCg9wb2toYXJhIHppcGxpbmVaESIPcG9raGFyYSB6aXBsaW5lkgEXYWR2ZW50dXJlX3Nwb3J0c19jZW50ZXKaASRDaGREU1VoTk1HOW5TMFZKUTBGblNVTkNkbVI2V0dkQlJSQUKqAVAKCS9tLzAzMTFrcRABKgsiB3ppcGxpbmUoADIfEAEiGwMW6Eh2Kv0TFXuXQv8gPZyYxUZM05oycgzrlTITEAIiD3Bva2hhcmEgemlwbGluZeABAPoBBAhjEEI!16s%2Fg%2F11f03v_dlc!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D','_blank')">
       <img src="images/google_maps.webp" alt="Google Maps Logo"> View on Maps
     </button>
   </div>

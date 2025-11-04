@@ -6,208 +6,89 @@
 <title>Dare to Discover Nepal - Discover Nepal</title>
 <link rel="icon" href="images/logo/mainLogo.png">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-height:1.7; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:#fff;color:#222;line-height:1.7;}
+html{scroll-behavior:smooth;}
 
 /* ---------- NAVBAR ---------- */
-.navbar{
-  position:fixed; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between;
-  padding:18px 28px; background:rgba(0,0,0,0.6); z-index:1000; backdrop-filter: blur(8px); transition:background .3s, padding .3s;
-}
-.navbar.scrolled{ background:rgba(0,0,0,0.9); padding:10px 20px;}
-.logo{ font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px; color:#fff; }
-.nav-links{ display:flex; gap:24px; align-items:center; }
-.nav-links a{ color:#fff; font-weight:600; text-decoration:none; }
-.nav-links a:hover{ color:#ffd700; }
+.navbar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+padding:18px 28px;background:rgba(0,0,0,0.6);z-index:1000;backdrop-filter:blur(8px);transition:background .3s,padding .3s;}
+.navbar.scrolled{background:rgba(0,0,0,0.9);padding:10px 20px;}
+.logo{font-weight:700;font-size:1.25rem;display:flex;align-items:center;gap:8px;color:#fff;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{color:#fff;font-weight:600;text-decoration:none;}
+.nav-links a:hover{color:#ffd700;}
+.hamburger{display:none;width:42px;height:42px;background:transparent;border:1px solid rgba(255,255,255,0.2);
+border-radius:8px;justify-content:center;align-items:center;font-size:1.3rem;color:#fff;cursor:pointer;}
+.nav-drawer{display:flex;flex-direction:column;gap:8px;position:fixed;top:64px;right:20px;background:rgba(0,0,0,0.95);
+padding:12px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6);z-index:1200;}
+.nav-drawer[hidden]{display:none;}
+.nav-drawer a{padding:8px 12px;color:#fff;}
+.nav-drawer a:hover{color:#ffd700;}
+@media(max-width:768px){.nav-links{display:none;}.hamburger{display:flex;}}
 
-.hamburger{ display:none; width:42px; height:42px; background:transparent; border:1px solid rgba(255,255,255,0.2); border-radius:8px; justify-content:center; align-items:center; font-size:1.3rem; color:#fff; cursor:pointer; }
-.nav-drawer{ display:flex; flex-direction:column; gap:8px; position:fixed; top:64px; right:20px; background:rgba(0,0,0,0.95); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1200; }
-.nav-drawer[hidden]{ display:none; }
-.nav-drawer a{ padding:8px 12px; color:#fff; }
-.nav-drawer a:hover{ color:#ffd700; }
+/* ---------- HERO ---------- */
+.hero{position:relative;height:100vh;width:100%;background:url('images/webpage_images/discovernepal/main-img.jpg')center/cover no-repeat;
+display:flex;align-items:flex-end;justify-content:flex-end;padding:40px;color:#fff;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:0;}
+.hero-info{position:relative;max-width:500px;z-index:1;text-align:right;opacity:0;animation:fadeIn 1.8s ease forwards;}
+.hero-info h2{font-size:3rem;margin-bottom:20px;color:#11f6b1;}
+.hero-info p{font-size:1.3rem;line-height:1.8;color:#fff;}
+.hero-info .hero-btn{margin-top:20px;padding:12px 25px;font-weight:700;color:#000;background:#3adeac;border:none;
+border-radius:12px;cursor:pointer;position:relative;overflow:hidden;}
+.hero-info .hero-btn::before{content:"";position:absolute;inset:0;border:2px solid #90802a;border-radius:12px;transform:scaleX(0);
+transform-origin:left;transition:transform 1s ease;}
+.hero-info .hero-btn.animate::before{transform:scaleX(1);}
+.hero-btn:hover{background-color:#09adaa;}
+@keyframes fadeIn{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
 
-@media(max-width:768px){ .nav-links{ display:none; } .hamburger{ display:flex; } }
+/* Scroll Down */
+.scroll-down{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);text-align:center;color:#fff;
+font-weight:600;animation:bounce 2s infinite;z-index:2;}
+.scroll-down .arrow{font-size:2rem;margin-top:5px;}
+.scroll-down a{color:#fff;text-decoration:none;}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0);}
+40%{transform:translateX(-50%) translateY(-10px);}
+60%{transform:translateX(-50%) translateY(-5px);}}
 
-/* ---------- HERO / TOP SECTION ---------- */
-.hero {
-  position: relative;
-  height:100vh;
-  width:100%;
-  background: url('images/main-images(show)/discover_hero.jpg') center/cover no-repeat;
-  display:flex;
-  align-items:flex-end;
-  justify-content:flex-end;
-  padding:40px;
-  color:#fff;
-  overflow:hidden;
-}
-.hero::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,0.4);
-  z-index:0;
-}
-.hero-info {
-  position: relative;
-  max-width:500px;
-  z-index:1;
-  text-align:right;
-  opacity:0;
-  animation: fadeIn 1.8s ease forwards;
-}
-.hero-info h2 {
-  font-size:3rem;
-  margin-bottom:20px;
-  color:#11f6b1;
-}
-.hero-info p {
-  font-size:1.3rem;
-  line-height:1.8;
-  color:#fff;
-}
-.hero-info .hero-btn {
-  margin-top:20px;
-  padding:12px 25px;
-  font-weight:700;
-  color:#000;
-  background:#3adeac;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-}
-.hero-info .hero-btn::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  border: 2px solid #90802a;
-  border-radius:12px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1s ease;
-}
-.hero-info .hero-btn.animate::before {
-  transform: scaleX(1);
-}
-.hero-btn:hover{
-  background-color: #09adaa;
-}
+/* ---------- CONTENT ---------- */
+.info-section{max-width:1000px;margin:40px auto;padding:0 20px;}
+.info-section h3{color:#1a237e;font-size:1.8rem;margin-bottom:12px;}
+.info-section p{font-size:1.15rem;}
 
-/* Scroll Down Indicator */
-.scroll-down {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: #fff;
-  font-weight: 600;
-  animation: bounce 2s infinite;
-  z-index: 2;
-}
-.scroll-down .arrow {
-  font-size: 2rem;
-  margin-top: 5px;
-}
-.scroll-down a {
-  color: #fff;
-  text-decoration: none;
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-  40% { transform: translateX(-50%) translateY(-10px); }
-  60% { transform: translateX(-50%) translateY(-5px); }
-}
-
-@keyframes fadeIn {
-  0% { opacity:0; transform: translateY(30px);}
-  100% { opacity:1; transform: translateY(0);}
-}
-
-/* ---------- INFO SECTIONS ---------- */
-.info-section {
-  max-width:1000px;
-  margin:40px auto;
-  padding:0 20px;
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  text-align:left;
-}
-.info-section h3 {
-  color:#1a237e;
-  font-size:1.8rem;
-  margin-bottom:12px;
-}
-.info-section p {
-  color:#222;
-  font-size:1.15rem;
-}
-.info-section ul li {
-  margin-bottom:8px;
-}
-
-/* ---------- ACTIVITIES SECTION ---------- */
-.activity-section {
-  width: 100%;
-  margin: 50px 0;
-  padding: 0 20px;
-}
-.activity-section img {
-  width: 100%;
-  display:block;
-  cursor:pointer;
-}
-.activity-section h4 {
-  margin-top: 10px;
-  font-size:1.5rem;
-  color:#0a3f5f;
-}
-.activity-section p {
-  margin:10px 0;
-}
-.map-btn {
-  display:flex;
-  align-items:center;
-  gap:6px;
-  background:#fff;
-  color:#222;
-  font-weight:bold;
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
-.map-btn img {
-  width:20px;
-  height:20px;
-}
+.activity-section{width:100%;margin:50px 0;padding:0 20px;}
+.activity-section img{width:100%;display:block;border-radius:8px;}
+.activity-section h4{margin-top:10px;font-size:1.5rem;color:#0a3f5f;}
+.activity-section p{margin:10px 0;}
+.map-btn{display:flex;align-items:center;gap:6px;background:#fff;color:#222;font-weight:bold;padding:8px 12px;
+border:none;border-radius:8px;cursor:pointer;}
+.map-btn img{width:20px;height:20px;}
 
 /* ---------- FOOTER ---------- */
-.footer{ background:#111; color:#fff; padding:40px 6%; font-family:'Poppins',sans-serif;}
-.footer-bottom{ text-align:center; margin-top:30px; color:#888;}
-.footer a{ color:#d37474; }
-
-/* ---------- RESPONSIVE ---------- */
-@media(max-width:900px){
-  .hero { justify-content:center; align-items:center; text-align:center; flex-direction:column; height:60vh; padding:20px; }
-  .hero-info { max-width:90%; text-align:center; }
-  .hero-info h2 { font-size:2.2rem; }
-  .hero-info p { font-size:1.1rem; }
-}
-html { scroll-behavior: smooth; }
+.footer{background:#111;color:#fff;padding:40px 6%;font-family:'Poppins',sans-serif;}
+.footer-bottom{text-align:center;margin-top:30px;color:#888;}
+.footer a{color:#d37474;}
 </style>
 </head>
 <body>
 
+<!-- Preloader -->
+<div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
+  <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
+  <div class="loader-text" style="margin-top:12px;color:#ffb74d;font-weight:700;">Discover Nepal</div>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const pre=document.getElementById('preloader');
+  pre.style.opacity='0';pre.style.visibility='hidden';pre.style.pointerEvents='none';
+});
+const s=document.createElement('style');s.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';document.head.appendChild(s);
+</script>
+
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
-  <div class="logo">
-    <img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;">
-    <span>Discover Nepal</span>
-  </div>
+  <div class="logo"><img src="images/logo/mainlogo.png" alt="Logo" style="height:40px;"><span>Discover Nepal</span></div>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="contact.html">Contact</a>
@@ -221,11 +102,11 @@ html { scroll-behavior: smooth; }
   </div>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section class="hero">
   <div class="hero-info">
     <h2>Dare to Discover Nepal</h2>
-    <p>Embark on Nepal’s most thrilling adventures—from soaring heights to roaring rivers—summarized for every adrenaline seeker.</p>
+    <p>Embark on Nepal’s must-do adventures—from mountains to sky—to experience the heartbeat of the Himalayas.</p>
     <button class="hero-btn">Explore Activities</button>
   </div>
   <div class="scroll-down">
@@ -234,240 +115,60 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<!-- Overview Section -->
+<!-- Overview -->
 <section class="info-section">
   <h3>Adventure Overview</h3>
-  <p>Nepal offers some of the most diverse adventure activities in the world. Whether you’re a trekker, a thrill-seeker, or a nature lover, there’s something here for everyone.</p>
+  <p>These are the essential experiences every traveler must try in Nepal — a perfect blend of thrill, nature, and culture.</p>
 </section>
 
-<!-- Activities Section -->
-<section id="activities">
-<br><br>
-<section class="info-section">
-<h3>Most Popular Adventure Activities</h3>
+<!-- MUST-DO ACTIVITIES -->
+<section id="activities" class="info-section">
+<h3>Must-Do Adventure Activities</h3>
 
-<!-- Activities Section continued -->
-<!-- 1. Trekking -->
 <div class="activity-section">
-  <img src="images/main-images(show)/trekking_hero.jpg" alt="Trekking in Nepal">
+  <img src="images/webpage_images/trekking/main-img.jpg" alt="Trekking in Nepal">
   <h4>Trekking</h4>
-  <p>Explore iconic trails like Everest Base Camp, Annapurna Circuit, and Langtang Valley, experiencing mountains, culture, and wildlife.</p>
+  <p>Hike world-famous trails like Everest Base Camp, Annapurna Circuit, and Langtang Valley — the soul of Himalayan adventure.</p>
   <button class="map-btn" onclick="window.open('trekking.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
+    <img src="images/google_maps.webp" alt=""> Learn More
   </button>
 </div>
 
-<!-- 2. Whitewater Rafting -->
 <div class="activity-section">
-  <img src="images/main-images(show)/rafting_hero.jpg" alt="Rafting in Nepal">
-  <h4>Whitewater Rafting</h4>
-  <p>Ride the thrilling rapids of Bhote Koshi, Trishuli, and Seti rivers, surrounded by breathtaking Himalayan landscapes.</p>
-  <button class="map-btn" onclick="window.open('rafting.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 3. Bungee Jump -->
-<div class="activity-section">
-  <img src="images/main-images(show)/bungee_hero.jpg" alt="Bungee Jump in Nepal">
-  <h4>Bungee Jump</h4>
-  <p>Leap off the iconic Bhote Koshi suspension bridge, the highest bungee jump in Nepal, for an adrenaline-pumping freefall over the gorge.</p>
-  <button class="map-btn" onclick="window.open('bungee.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 4. Zipline -->
-<div class="activity-section">
-  <img src="images/main-images(show)/zipline_hero.jpg" alt="Zipline in Nepal">
-  <h4>Zipline</h4>
-  <p>Fly across valleys and rivers on some of the world’s longest and highest ziplines, enjoying panoramic Himalayan views.</p>
-  <button class="map-btn" onclick="window.open('zipline.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 5. Paragliding -->
-<div class="activity-section">
-  <img src="images/main-images(show)/paragliding_hero.jpg" alt="Paragliding in Nepal">
+  <img src="images/webpage_images/paragliding/main_img.jpg" alt="Paragliding in Pokhara">
   <h4>Paragliding</h4>
-  <p>Soar over Pokhara with breathtaking views of Phewa Lake, the Annapurna range, and the entire Pokhara valley from the sky.</p>
+  <p>Soar above Pokhara’s sky with stunning views of Phewa Lake and the Annapurna range — an unforgettable aerial experience.</p>
   <button class="map-btn" onclick="window.open('paragliding.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
+    <img src="images/google_maps.webp" alt=""> Learn More
   </button>
 </div>
 
-<!-- 6. Mountain Biking -->
 <div class="activity-section">
-  <img src="images/main-images(show)/mountain_biking_hero.jpg" alt="Mountain Biking in Nepal">
-  <h4>Mountain Biking</h4>
-  <p>Ride trails through hills, forests, and villages in Pokhara, Kathmandu Valley, and Mustang for an adventurous biking experience.</p>
-  <button class="map-btn" onclick="window.open('mountainbiking.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
+  <img src="images/webpage_images/rafting/main_img.jpg" alt="Rafting in Nepal">
+  <h4>Whitewater Rafting</h4>
+  <p>Paddle through the wild rapids of Trishuli and Bhote Koshi rivers — adventure and nature in perfect harmony.</p>
+  <button class="map-btn" onclick="window.open('rafting.html','_blank')">
+    <img src="images/google_maps.webp" alt=""> Learn More
   </button>
 </div>
 
-<!-- 7. Rock Climbing -->
 <div class="activity-section">
-  <img src="images/main-images(show)/rock_climbing_hero.jpg" alt="Rock Climbing in Nepal">
-  <h4>Rock Climbing</h4>
-  <p>Challenge yourself on natural rock faces in Shivapuri, Chisapani, and Pokhara cliffs with breathtaking mountain backdrops.</p>
-  <button class="map-btn" onclick="window.open('rockclimbing.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
+  <img src="images/webpage_images/bungee/main-img.jpg" alt="Bungee Jump in Nepal">
+  <h4>Bungee Jump</h4>
+  <p>Take the leap at the Bhote Koshi gorge or Kushma bridge — Nepal’s ultimate heart-stopping thrill.</p>
+  <button class="map-btn" onclick="window.open('bungee.html','_blank')">
+    <img src="images/google_maps.webp" alt=""> Learn More
   </button>
 </div>
 
-<!-- 8. Wildlife Safari -->
 <div class="activity-section">
-  <img src="images/main-images(show)/wildlife_safari_hero.jpg" alt="Wildlife Safari in Nepal">
-  <h4>Wildlife Safari</h4>
-  <p>Jeep and elephant safaris in Chitwan or Bardia National Parks to see rhinos, tigers, elephants, and exotic birds in their natural habitat.</p>
-  <button class="map-btn" onclick="window.open('wildlifesafari.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
+  <img src="images/webpage_images/zipline/macchapuchre.webp" alt="Zipline in Nepal">
+  <h4>Zipline</h4>
+  <p>Fly across valleys at incredible speeds on the world’s steepest zipline in Pokhara.</p>
+  <button class="map-btn" onclick="window.open('zipline.html','_blank')">
+    <img src="images/google_maps.webp" alt=""> Learn More
   </button>
 </div>
-
-<!-- 9. Canyoning -->
-<div class="activity-section">
-  <img src="images/main-images(show)/canyoning_hero.jpg" alt="Canyoning in Nepal">
-  <h4>Canyoning</h4>
-  <p>Descend waterfalls, rapids, and gorges in the Himalayan valleys for a mix of trekking, jumping, swimming, and abseiling.</p>
-  <button class="map-btn" onclick="window.open('canyoning.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 10. Camping & Nature Hikes -->
-<div class="activity-section">
-  <img src="images/main-images(show)/camping_hiking_hero.jpg" alt="Camping in Nepal">
-  <h4>Camping & Nature Hikes</h4>
-  <p>Experience remote landscapes, serene rivers, and forests while camping under the stars along trails and valleys in Nepal.</p>
-  <button class="map-btn" onclick="window.open('camping.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 11. Jungle Trekking -->
-<div class="activity-section">
-  <img src="images/main-images(show)/jungle_trekking_hero.jpg" alt="Jungle Trekking in Nepal">
-  <h4>Jungle Trekking</h4>
-  <p>Explore subtropical jungles in Chitwan, Bardia, and Suklaphanta while spotting wildlife and indigenous communities.</p>
-  <button class="map-btn" onclick="window.open('jungletrekking.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 12. Ice Climbing -->
-<div class="activity-section">
-  <img src="images/main-images(show)/ice_climbing_hero.jpg" alt="Ice Climbing in Nepal">
-  <h4>Ice Climbing</h4>
-  <p>Climb frozen waterfalls and ice walls in regions like Langtang and Annapurna for a thrilling winter adventure.</p>
-  <button class="map-btn" onclick="window.open('iceclimbing.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 13. Rock Scrambling -->
-<div class="activity-section">
-  <img src="images/main-images(show)/rock_scrambling_hero.jpg" alt="Rock Scrambling in Nepal">
-  <h4>Rock Scrambling</h4>
-  <p>Navigate rocky terrains of the Himalayan foothills combining trekking and climbing skills for an adventurous challenge.</p>
-  <button class="map-btn" onclick="window.open('rockscrambling.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 14. Kayaking -->
-<div class="activity-section">
-  <img src="images/main-images(show)/kayaking_hero.jpg" alt="Kayaking in Nepal">
-  <h4>Kayaking</h4>
-  <p>Experience rivers like Seti and Bhote Koshi on kayaks, combining whitewater thrills and scenic beauty.</p>
-  <button class="map-btn" onclick="window.open('kayaking.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 15. Hot Air Ballooning -->
-<div class="activity-section">
-  <img src="images/main-images(show)/hot_air_balloon_hero.jpg" alt="Hot Air Ballooning in Nepal">
-  <h4>Hot Air Ballooning</h4>
-  <p>Soar over the Kathmandu Valley or Chitwan National Park at sunrise for peaceful aerial views of mountains and jungles.</p>
-  <button class="map-btn" onclick="window.open('hotairballoon.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 16. Trail Running -->
-<div class="activity-section">
-  <img src="images/main-images(show)/trail_running_hero.jpg" alt="Trail Running in Nepal">
-  <h4>Trail Running</h4>
-  <p>Run through scenic trails in Pokhara, Annapurna, and Shivapuri hills while challenging yourself physically and mentally.</p>
-  <button class="map-btn" onclick="window.open('trailrunning.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 17. Skydiving -->
-<div class="activity-section">
-  <img src="images/main-images(show)/skydiving_hero.jpg" alt="Skydiving in Nepal">
-  <h4>Skydiving</h4>
-  <p>Experience freefall over Pokhara valley and lakes with spectacular aerial views of the Himalayas.</p>
-  <button class="map-btn" onclick="window.open('skydiving.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 18. Horse Riding -->
-<div class="activity-section">
-  <img src="images/main-images(show)/horse_riding_hero.jpg" alt="Horse Riding in Nepal">
-  <h4>Horse Riding</h4>
-  <p>Enjoy scenic horseback rides in Mustang, Annapurna, and Pokhara valleys while exploring traditional villages.</p>
-  <button class="map-btn" onclick="window.open('horseriding.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 19. Fishing -->
-<div class="activity-section">
-  <img src="images/main-images(show)/fishing_hero.jpg" alt="Fishing in Nepal">
-  <h4>Fishing</h4>
-  <p>Relax along rivers and lakes in Nepal, catching trout and other freshwater species while enjoying peaceful nature.</p>
-  <button class="map-btn" onclick="window.open('fishing.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 20. Rock Pooling & Waterfalls -->
-<div class="activity-section">
-  <img src="images/main-images(show)/waterfalls_hero.jpg" alt="Waterfall Adventure in Nepal">
-  <h4>Waterfall Adventure</h4>
-  <p>Discover hidden waterfalls and natural rock pools in Pokhara and Langtang for swimming, climbing, and relaxation.</p>
-  <button class="map-btn" onclick="window.open('waterfalls.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 21. Cultural Adventure -->
-<div class="activity-section">
-  <img src="images/main-images(show)/cultural_adventure_hero.jpg" alt="Cultural Adventure in Nepal">
-  <h4>Cultural Adventure</h4>
-  <p>Combine trekking and exploration with visits to monasteries, temples, and traditional festivals to immerse yourself in Nepalese culture.</p>
-  <button class="map-btn" onclick="window.open('culturaladventure.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-<!-- 22. Rock & Ice Exploration -->
-<div class="activity-section">
-  <img src="images/main-images(show)/rock_ice_exploration_hero.jpg" alt="Rock & Ice Exploration in Nepal">
-  <h4>Rock & Ice Exploration</h4>
-  <p>Adventure through glaciers, ice caves, and rock formations in the Himalayas for an extreme adventure experience.</p>
-  <button class="map-btn" onclick="window.open('rockiceexploration.html','_blank')">
-    <img src="images/google_maps.webp" alt="Google Maps Logo"> Learn More
-  </button>
-</div>
-
-</section>
 </section>
 
 <!-- Footer -->
@@ -478,34 +179,13 @@ html { scroll-behavior: smooth; }
 </footer>
 
 <script>
-/* Navbar scroll */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if(window.scrollY > 50) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
-});
-
-/* Hamburger */
-const hamburger = document.getElementById('hamburger');
-const navDrawer = document.getElementById('nav-drawer');
-hamburger.addEventListener('click', () => {
-  if(navDrawer.hasAttribute('hidden')) navDrawer.removeAttribute('hidden');
-  else navDrawer.setAttribute('hidden','');
-});
-document.querySelectorAll('.nav-drawer a').forEach(link => {
-  link.addEventListener('click', () => navDrawer.setAttribute('hidden',''));
-});
-
-/* Animate hero button border */
-window.addEventListener('load', () => {
-  document.querySelector('.hero-btn').classList.add('animate');
-});
-
-/* Hero button scroll */
-document.querySelector('.hero-btn').addEventListener('click', function() {
-    document.getElementById('activities').scrollIntoView({ behavior: 'smooth' });
-});
-
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const hamburger=document.getElementById('hamburger'),drawer=document.getElementById('nav-drawer');
+hamburger.addEventListener('click',()=>{drawer.toggleAttribute('hidden');});
+document.querySelectorAll('.nav-drawer a').forEach(a=>a.addEventListener('click',()=>drawer.setAttribute('hidden','')));
+window.addEventListener('load',()=>{document.querySelector('.hero-btn').classList.add('animate');});
+document.querySelector('.hero-btn').addEventListener('click',()=>{document.getElementById('activities').scrollIntoView({behavior:'smooth'});});
 </script>
 
 </body>
