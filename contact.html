@@ -58,6 +58,40 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 .tour-btn:hover { background: #fefefe; color: black; }
 
 .tour-highlight { border: 2px solid #000; }
+/* Popup Notification */
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 22px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease, top 0.5s ease;
+}
+
+/* Success = green */
+.popup.success {
+  background: #28a745;
+  box-shadow: 0 5px 20px rgba(40,167,69,0.25);
+}
+
+/* Error = red */
+.popup.error {
+  background: #dc3545;
+  box-shadow: 0 5px 20px rgba(220,53,69,0.25);
+}
+
+/* Show */
+.popup.show {
+  opacity: 1;
+  top: 40px;
+}
 
 @media (max-width: 950px) { .tour-cards { flex-direction: column; align-items: center; } }
 
@@ -111,6 +145,46 @@ window.addEventListener('load',()=>{
 const style=document.createElement('style');
 style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
 document.head.appendChild(style);
+function showPopup(message, type = "success") {
+    const popup = document.getElementById("formPopup");
+    popup.textContent = message;
+
+    // Reset previous classes
+    popup.className = "popup";
+
+    // Add type and show
+    popup.classList.add(type, "show");
+
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 3000);
+}
+
+// Example: AJAX form submission
+document.getElementById("contactForm")?.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("submit_contact.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data.trim() === "SUCCESS") {
+            showPopup("Form submitted successfully!", "success");
+            this.reset();
+        } else {
+            showPopup("There was a problem submitting the form.", "error");
+        }
+    })
+    .catch(() => {
+        showPopup("Server error. Please try again.", "error");
+    });
+});
+
 </script>
 
 <!-- Navbar -->
@@ -162,10 +236,10 @@ document.head.appendChild(style);
     </div>
 
     <form class="contact-form" id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="text" id="subject" placeholder="Subject" required>
-      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <input type="text" id="subject" name="subject" placeholder="Subject" required>
+      <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </div>
@@ -301,6 +375,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+<!-- Popup Notification -->
+<div id="formPopup" class="popup"></div>
 
 </body>
 </html>

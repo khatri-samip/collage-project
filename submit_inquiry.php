@@ -1,76 +1,66 @@
 <?php
-// Connect to database
-include("db_connect.php");
+// --- Database connection ---
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "discover_nepal-1";
 
-// Collect form data
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+
+// --- Receive form data ---
 $name        = $_POST['name'] ?? '';
 $email       = $_POST['email'] ?? '';
 $phone       = $_POST['phone'] ?? '';
 $travelers   = $_POST['travelers'] ?? '';
-$date        = $_POST['date'] ?? NULL;
+$date        = $_POST['date'] ?? '';
 $destination = $_POST['destination'] ?? '';
 $info        = $_POST['info'] ?? '';
 
-// Clean input (basic sanitization)
-$name        = mysqli_real_escape_string($conn, $name);
-$email       = mysqli_real_escape_string($conn, $email);
-$phone       = mysqli_real_escape_string($conn, $phone);
-$travelers   = (int)$travelers;
-$destination = mysqli_real_escape_string($conn, $destination);
-$info        = mysqli_real_escape_string($conn, $info);
+// --- Map package name → table name ---
+$package_tables = [
+    "Essential Nepal"             => "essential_nepal",
+    "Himalayan Adventure"         => "himalayan_adventure",
+    "Complete Nepal Experience"   => "complete_nepal_experience",
+    "Custom Package"              => "custom_inquiry",
+    "Custom Inquiry"              => "custom_inquiry"
+];
 
-// --- Determine which table to insert into ---
-$table = "";
-
-switch (strtolower($destination)) {
-  case "essential nepal":
-    $table = "essential_nepal";
-    break;
-  case "himalayan adventure":
-    $table = "himalayan_adventure";
-    break;
-  case "complete nepal experience":
-    $table = "complete_nepal_experience";
-    break;
-  default:
-    // Anything else (including dropdown selections)
-    $table = "custom_inquiry";
-    break;
-}
-
-// --- Insert into database ---
-$sql = "INSERT INTO $table (name, email, phone, travelers, travel_date, destination, info)
-        VALUES ('$name', '$email', '$phone', $travelers, " .
-        ($date ? "'$date'" : "NULL") . ", '$destination', '$info')";
-
-if ($conn->query($sql) === TRUE) {
-  echo "
-    <div style='
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      font-family:Poppins, sans-serif;
-      background:#f9f9f9;
-      text-align:center;
-    '>
-      <h2 style='color:#111;'>Thank you, $name!</h2>
-      <p>Your inquiry for <strong>$destination</strong> has been received.</p>
-      <a href='index.html' style='
-        display:inline-block;
-        margin-top:20px;
-        background:#000;
-        color:#fff;
-        padding:10px 20px;
-        border-radius:6px;
-        text-decoration:none;
-      '>Back to Home</a>
-    </div>
-  ";
+// Validate + pick table (SAFE)
+if (array_key_exists($destination, $package_tables)) {
+    $table = $package_tables[$destination];
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+    $table = "general_inquiries"; // fallback table
 }
 
+// --- SAFE insert query ---
+$sql = "INSERT INTO `$table` 
+        (name, email, phone, travelers, travel_date, destination, additional_info)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bind_param("sssisss",
+    $name,
+    $email,
+    $phone,
+    $travelers,
+    $date,
+    $destination,
+    $info
+);
+
+// Output result for AJAX
+if ($stmt->execute()) {
+    echo "SUCCESS";
+} else {
+    echo "ERROR";
+}
+
+$stmt->close();
 $conn->close();
 ?>
