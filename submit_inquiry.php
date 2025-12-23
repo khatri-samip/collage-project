@@ -9,7 +9,7 @@ $conn = new mysqli($host, $user, $pass, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
+    die("ERROR: Could not connect. " . $conn->connect_error);
 }
 
 // --- Receive form data ---
@@ -21,44 +21,49 @@ $date        = $_POST['date'] ?? '';
 $destination = $_POST['destination'] ?? '';
 $info        = $_POST['info'] ?? '';
 
-// --- Map package name → table name ---
-$package_tables = [
-    "Essential Nepal"             => "essential_nepal",
-    "Himalayan Adventure"         => "himalayan_adventure",
-    "Complete Nepal Experience"   => "complete_nepal_experience",
-    "Custom Package"              => "custom_inquiry",
-    "Custom Inquiry"              => "custom_inquiry"
-];
-
-// Validate + pick table (SAFE)
-if (array_key_exists($destination, $package_tables)) {
-    $table = $package_tables[$destination];
-} else {
-    $table = "general_inquiries"; // fallback table
+// --- Determine table based on package/destination ---
+$table = '';
+switch (strtolower($destination)) {
+    case 'essential nepal':
+        $table = 'essential_nepal';
+        break;
+    case 'himalayan adventure':
+        $table = 'himalayan_adventure';
+        break;
+    case 'custom package':
+    case 'custom inquiry':
+    case 'custom':
+        $table = 'custom_package';
+        break;
+    default:
+        // Fallback table
+        $table = 'custom_package';
+        break;
 }
 
-// --- SAFE insert query ---
-$sql = "INSERT INTO `$table` 
-        (name, email, phone, travelers, travel_date, destination, additional_info)
-        VALUES (?, ?, ?, ?, ?, ?, ?)";
+// --- Create table if it doesn't exist ---
+$createTableSQL = "CREATE TABLE IF NOT EXISTS `$table` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    travelers INT NOT NULL,
+    travel_date DATE NULL,
+    destination VARCHAR(255) NOT NULL,
+    additional_info TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-$stmt = $conn->prepare($sql);
+$conn->query($createTableSQL);
 
-$stmt->bind_param("sssisss",
-    $name,
-    $email,
-    $phone,
-    $travelers,
-    $date,
-    $destination,
-    $info
-);
+// --- Insert form data ---
+$stmt = $conn->prepare("INSERT INTO `$table` (name,email,phone,travelers,travel_date,destination,additional_info) VALUES (?,?,?,?,?,?,?)");
+$stmt->bind_param("sssiiss", $name, $email, $phone, $travelers, $date, $destination, $info);
 
-// Output result for AJAX
 if ($stmt->execute()) {
     echo "SUCCESS";
 } else {
-    echo "ERROR";
+    echo "ERROR: " . $stmt->error;
 }
 
 $stmt->close();

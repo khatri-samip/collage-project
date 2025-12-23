@@ -58,6 +58,8 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
 .tour-btn:hover { background: #fefefe; color: black; }
 
 .tour-highlight { border: 2px solid #000; }
+
+
 /* Popup Notification */
 .popup {
   position: fixed;
@@ -72,26 +74,22 @@ body { font-family: 'Poppins', sans-serif; background:#fff; color:#222; line-hei
   z-index: 2000;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.5s ease, top 0.5s ease;
+  transition: opacity 0.5s, top 0.5s;
 }
 
-/* Success = green */
 .popup.success {
-  background: #28a745;
-  box-shadow: 0 5px 20px rgba(40,167,69,0.25);
+  background: #28a745; /* green */
 }
 
-/* Error = red */
 .popup.error {
-  background: #dc3545;
-  box-shadow: 0 5px 20px rgba(220,53,69,0.25);
+  background: #dc3545; /* red */
 }
 
-/* Show */
 .popup.show {
   opacity: 1;
   top: 40px;
 }
+
 
 @media (max-width: 950px) { .tour-cards { flex-direction: column; align-items: center; } }
 
@@ -127,6 +125,7 @@ textarea{ resize: none; }
 </style>
 </head>
 <body>
+
 <!-- PRELOADER -->
 <div id="preloader" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:opacity .6s ease;">
   <div class="spinner" style="width:50px;height:50px;border:5px solid #ffb74d;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
@@ -145,46 +144,6 @@ window.addEventListener('load',()=>{
 const style=document.createElement('style');
 style.innerHTML='@keyframes spin{to{transform:rotate(360deg);}}';
 document.head.appendChild(style);
-function showPopup(message, type = "success") {
-    const popup = document.getElementById("formPopup");
-    popup.textContent = message;
-
-    // Reset previous classes
-    popup.className = "popup";
-
-    // Add type and show
-    popup.classList.add(type, "show");
-
-    // Auto-hide after 3 seconds
-    setTimeout(() => {
-        popup.classList.remove("show");
-    }, 3000);
-}
-
-// Example: AJAX form submission
-document.getElementById("contactForm")?.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    fetch("submit_contact.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(data => {
-        if (data.trim() === "SUCCESS") {
-            showPopup("Form submitted successfully!", "success");
-            this.reset();
-        } else {
-            showPopup("There was a problem submitting the form.", "error");
-        }
-    })
-    .catch(() => {
-        showPopup("Server error. Please try again.", "error");
-    });
-});
-
 </script>
 
 <!-- Navbar -->
@@ -325,7 +284,50 @@ document.getElementById("contactForm")?.addEventListener("submit", function(e){
   </div>
 </footer>
 
+<!-- Popup Notification -->
+<div id="formPopup" class="popup"></div>
+
 <script>
+  function showPopup(message, type = "success") {
+    const popup = document.getElementById("formPopup");
+    popup.textContent = message;
+
+    // Reset previous classes
+    popup.className = "popup";
+
+    // Add type and show
+    popup.classList.add(type, "show");
+
+    // Hide automatically after 3 seconds
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 3000);
+}
+
+// AJAX form submission
+document.getElementById("contactForm")?.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("submit_contact.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data.trim() === "SUCCESS") {
+            showPopup("Message sent successfully!", "success");
+            this.reset();
+        } else {
+            showPopup("Error sending message. Try again.", "error");
+        }
+    })
+    .catch(() => {
+        showPopup("Server error. Please try again.", "error");
+    });
+});
+
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => { 
   if(window.scrollY > 50) navbar.classList.add('scrolled'); 
@@ -375,8 +377,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-<!-- Popup Notification -->
-<div id="formPopup" class="popup"></div>
-
 </body>
 </html>

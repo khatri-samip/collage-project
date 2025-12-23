@@ -24,6 +24,17 @@
     <a href="#tour-packages">Packages</a>
     <a href="contact.html">Contact us</a>
     <a href="travelTips.html">Travel Tips</a>
+     <a href="javascript:void(0);" class="profile-icon" title="Profile" id="profileIcon">
+    <i class="bi bi-person-circle"></i>
+</a>
+
+<!-- Profile dropdown -->
+<div id="profileDropdown" class="profile-dropdown" hidden>
+    <p id="profileName">Name: Guest</p>
+    <p id="profileEmail"></p>
+    <button id="logoutBtn">Logout</button>
+</div>
+
   </div>
   <button class="hamburger" aria-expanded="false" aria-controls="mobile-drawer">☰</button>
   <div class="nav-drawer" id="mobile-drawer" hidden>
@@ -201,104 +212,253 @@
   </div>
 </footer>
 
+<!-- AUTH POPUP -->
+<div class="guest-overlay" id="guestOverlay">
+  <div class="guest-popup">
+
+    <!-- TOGGLE -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Login</button>
+      <button class="auth-tab" data-tab="signup">Sign Up</button>
+    </div>
+
+    <!-- LOGIN -->
+    <form class="auth-form show" id="loginForm">
+      <h2>Welcome Back</h2>
+
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <button type="submit" class="guest-btn primary">Login</button>
+      <p class="auth-msg" id="loginMsg"></p>
+    </form>
+
+    <!-- SIGNUP -->
+    <form class="auth-form" id="signupForm">
+      <h2>Create Account</h2>
+
+      <input type="text" name="fullname" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <button type="submit" class="guest-btn primary">Sign Up</button>
+      <p class="auth-msg" id="signupMsg"></p>
+    </form>
+
+    <button class="guest-btn ghost" id="continueGuest">Continue as Guest</button>
+  </div>
+</div>
+
+<!-- LOGIN ALERT POPUP -->
+<div id="loginAlert" class="login-alert">You are logged in!</div>
+
+
 <script>
 // PRELOADER
-window.addEventListener('load',()=>{ document.getElementById('preloader').classList.add('hide'); });
+window.addEventListener('load', () => {
+  document.getElementById('preloader').classList.add('hide');
 
-// MOBILE NAV
-const hamburger = document.querySelector('.hamburger');
-const drawer = document.getElementById('mobile-drawer');
-hamburger.addEventListener('click',()=>{
-  const expanded = hamburger.getAttribute('aria-expanded')==='true';
-  hamburger.setAttribute('aria-expanded', String(!expanded));
-  drawer.toggleAttribute('hidden');
+  // Show hero content after load
+  const heroContent = document.querySelector('.hero-content');
+  heroContent.classList.add('show');
 });
 
- document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".tour-btn");
+// VARIABLES
+const profileIcon = document.getElementById("profileIcon");
+const profileDropdown = document.getElementById("profileDropdown");
+const logoutBtn = document.getElementById("logoutBtn");
+const guestOverlay = document.getElementById("guestOverlay");
+const loginAlert = document.getElementById("loginAlert");
+const continueGuestBtn = document.getElementById("continueGuest");
+const hamburger = document.querySelector('.hamburger');
+const drawer = document.getElementById('mobile-drawer');
 
+// HERO PARALLAX
+const hero = document.querySelector('.hero');
+let scrollPos = 0;
+window.addEventListener('scroll', () => { scrollPos = window.scrollY; });
+function smoothParallax() {
+  hero.style.backgroundPositionY = scrollPos * 0.1 + "px";
+  requestAnimationFrame(smoothParallax);
+}
+smoothParallax();
+
+// DOM READY
+document.addEventListener("DOMContentLoaded", () => {
+
+  // AUTH POPUP
+  if (!sessionStorage.getItem("visited")) {
+    guestOverlay.classList.add("show");
+    sessionStorage.setItem("visited", "true");
+  }
+  continueGuestBtn?.addEventListener("click", () => guestOverlay.classList.remove("show"));
+
+  // AUTH TABS
+  document.querySelectorAll(".auth-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".auth-form").forEach(f => f.classList.remove("show"));
+
+      tab.classList.add("active");
+      document.getElementById(tab.dataset.tab + "Form").classList.add("show");
+    });
+  });
+
+  // AUTH FORMS
+  function sendAuth(type, form, msgId) {
+  const msg = document.getElementById(msgId);
+  const data = new FormData(form);
+  data.append("action", type);
+
+  fetch("loginin.php", { method: "POST", body: data })
+    .then(res => res.json())
+    .then(res => {
+      msg.textContent = res.message;
+      msg.style.color = res.success ? "#4caf50" : "#ff6b6b";
+
+      if (res.success) {
+        // Save name and email to sessionStorage
+        sessionStorage.setItem("userName", res.name);
+        sessionStorage.setItem("userEmail", res.email);
+
+        // Update profile dropdown immediately
+        document.getElementById("profileName").textContent = "Name: " + res.name;
+        document.getElementById("profileEmail").textContent = res.email;
+
+        // Show login alert popup
+        loginAlert.classList.add("show");
+        setTimeout(() => loginAlert.classList.remove("show"), 2500);
+
+        // Close auth popup
+        guestOverlay.classList.remove("show");
+      }
+    });
+}
+
+  document.getElementById("loginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    sendAuth("login", e.target, "loginMsg");
+  });
+  document.getElementById("signupForm").addEventListener("submit", e => {
+    e.preventDefault();
+    sendAuth("signup", e.target, "signupMsg");
+  });
+
+  // PROFILE DROPDOWN
+  const userName = sessionStorage.getItem("userName") || "Guest";
+  const userEmail = sessionStorage.getItem("userEmail") || "";
+  document.getElementById("profileName").textContent = "Name: " + userName;
+  document.getElementById("profileEmail").textContent = userEmail;
+
+  if (userName !== "Guest") {
+    loginAlert.classList.add("show");
+    setTimeout(() => loginAlert.classList.remove("show"), 2500);
+  }
+
+  profileIcon.addEventListener("click", e => {
+  e.stopPropagation();
+
+  const userName = sessionStorage.getItem("userName") || "Guest";
+  const userEmail = sessionStorage.getItem("userEmail") || "";
+
+  document.getElementById("profileName").textContent = "Name: " + userName;
+  document.getElementById("profileEmail").textContent = userEmail;
+
+  if (userName === "Guest") {
+    guestOverlay.classList.add("show");
+  } else {
+    profileDropdown.classList.toggle("show");
+    profileIcon.classList.toggle("active", profileDropdown.classList.contains("show"));
+  }
+});
+
+
+  logoutBtn.addEventListener("click", () => {
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("userEmail");
+    profileDropdown.classList.remove("show");
+    profileIcon.classList.remove("active");
+    location.reload();
+  });
+
+  document.addEventListener("click", e => {
+    if (!profileDropdown.contains(e.target) && e.target !== profileIcon) {
+      profileDropdown.classList.remove("show");
+      profileIcon.classList.remove("active");
+    }
+  });
+
+  // MOBILE NAV
+  hamburger.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!expanded));
+    drawer.toggleAttribute('hidden');
+  });
+
+  // TOUR PACKAGES BUTTONS
+  const buttons = document.querySelectorAll(".tour-btn");
   const packages = [
     { name: "Essential Nepal", duration: "7 Days", price: "$899", type: "fixed" },
     { name: "Himalayan Adventure", duration: "14 Days", price: "$1,899", type: "fixed" },
     { name: "Complete Nepal Experience", duration: "21 Days", price: "$2,499", type: "fixed" },
     { name: "Custom", duration: "Flexible", price: "Quoted", type: "custom",
-      options: [
-        "Essential Nepal","Himalayan Adventure","Complete Nepal Experience",
-        "Mount Everest Base Camp","Kathmandu Valley","Pokhara",
-        "Annapurna Circuit","Culture Tour","Custom Package"
-      ]
+      options: ["Essential Nepal","Himalayan Adventure","Complete Nepal Experience",
+                "Mount Everest Base Camp","Kathmandu Valley","Pokhara",
+                "Annapurna Circuit","Culture Tour","Custom Package"]
     }
   ];
 
   buttons.forEach((btn, index) => {
     btn.addEventListener("click", () => {
       const pkg = packages[index];
-      if(pkg.type === "fixed") {
-        const url = `booknow.html?name=${encodeURIComponent(pkg.name)}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
-        window.location.href = url;
-      } else if(pkg.type === "custom") {
+      if (pkg.type === "fixed") {
+        window.location.href = `booknow.html?name=${encodeURIComponent(pkg.name)}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
+      } else {
         const options = pkg.options.map(encodeURIComponent).join(",");
-        const url = `booknow.html?custom=1&options=${options}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
-        window.location.href = url;
+        window.location.href = `booknow.html?custom=1&options=${options}&duration=${encodeURIComponent(pkg.duration)}&price=${encodeURIComponent(pkg.price)}`;
       }
     });
   });
-});
 
-
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if(target){ target.scrollIntoView({behavior:'smooth',block:'start'});}
-    if(!drawer.hasAttribute('hidden')) drawer.setAttribute('hidden','');
-  });
-});
-
-// NAVBAR SCROLL EFFECT
-window.addEventListener('scroll',()=>{
-  const navbar = document.querySelector('.navbar');
-  if(window.scrollY>5) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
-});
-
-// CONTACT BUTTON REDIRECT
-document.querySelectorAll('.contact-us').forEach(button=>{
-  button.addEventListener('click',()=>{ window.location.href='contact.html'; });
-});
-
-// SCROLLER DUPLICATE ANIMATION
-const scrollers = document.querySelectorAll(".scroller");
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) addAnimation();
-
-function addAnimation() {
-  scrollers.forEach((scroller)=>{
-    scroller.setAttribute("data-animated", true);
-    const scrollerInner = scroller.querySelector(".scroller__inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-    scrollerContent.forEach((item)=>{
-      const duplicate=item.cloneNode(true);
-      duplicate.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicate);
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!drawer.hasAttribute('hidden')) drawer.setAttribute('hidden', '');
     });
   });
-}
 
-window.addEventListener('load', () => {
-  const heroContent = document.querySelector('.hero-content');
-  heroContent.classList.add('show');
+  // NAVBAR SCROLL EFFECT
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 5) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // CONTACT BUTTON REDIRECT
+  document.querySelectorAll('.contact-us').forEach(button => {
+    button.addEventListener('click', () => { window.location.href = 'contact.html'; });
+  });
+
+  // SCROLLER DUPLICATE ANIMATION
+  const scrollers = document.querySelectorAll(".scroller");
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    scrollers.forEach(scroller => {
+      scroller.setAttribute("data-animated", true);
+      const scrollerInner = scroller.querySelector(".scroller__inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+      scrollerContent.forEach(item => {
+        const duplicate = item.cloneNode(true);
+        duplicate.setAttribute("aria-hidden", true);
+        scrollerInner.appendChild(duplicate);
+      });
+    });
+  }
 });
 
-// HERO PARALLAX
-const hero = document.querySelector('.hero');
-let scrollPos=0;
-window.addEventListener('scroll',()=>{ scrollPos=window.scrollY; });
-function smoothParallax(){
-  hero.style.backgroundPositionY = scrollPos * 0.1 + "px"; 
-  requestAnimationFrame(smoothParallax);
-}
-smoothParallax();
+
 </script>
 
 </body>
